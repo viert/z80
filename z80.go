@@ -184,8 +184,12 @@ func (c *Context) Execute() {
 	}
 }
 
-func (c *Context) ExecuteTStates(tstates uint64) {
-
+func (c *Context) ExecuteTStates(tstates uint64) uint64 {
+	c.TStates = 0
+	for c.TStates < tstates {
+		c.Execute()
+	}
+	return c.TStates
 }
 
 func (c *Context) Reset() {
