@@ -47,6 +47,25 @@ const (
 type DataIn func(address uint16) byte
 type DataOut func(address uint16, data byte)
 
+type RegisterDump struct {
+	AF   uint16
+	AF_  uint16
+	BC   uint16
+	BC_  uint16
+	DE   uint16
+	DE_  uint16
+	HL   uint16
+	HL_  uint16
+	PC   uint16
+	SP   uint16
+	IX   uint16
+	IY   uint16
+	R    byte
+	I    byte
+	IFF1 bool
+	IFF2 bool
+}
+
 type Context struct {
 	R1   *RegisterSet
 	R2   *RegisterSet
@@ -83,6 +102,7 @@ type Context struct {
 
 	/* Debug assistance */
 	LatestInstruction string
+	LatestDump        RegisterDump
 
 	opcodes_main Z80OpcodeTable
 	opcodes_DD   Z80OpcodeTable
@@ -154,10 +174,12 @@ func (c *Context) doExecute() {
 					worddata := c.read16(c.PC)
 					c.LatestInstruction = fmt.Sprintf(entry.format, worddata)
 				}
+				c.copyDump()
 			}
 			c.PC -= uint16(offset)
 			opfunc()
 			c.PC += uint16(offset)
+
 			break
 		} else if tableEntries[opcode].nextTable != nil {
 			currentTable = tableEntries[opcode].nextTable
@@ -171,6 +193,25 @@ func (c *Context) doExecute() {
 			break
 		}
 	}
+}
+
+func (c *Context) copyDump() {
+	c.LatestDump.PC = c.PC
+	c.LatestDump.AF = *c.R1.AF
+	c.LatestDump.BC = *c.R1.BC
+	c.LatestDump.DE = *c.R1.DE
+	c.LatestDump.HL = *c.R1.HL
+	c.LatestDump.AF_ = *c.R2.AF
+	c.LatestDump.BC_ = *c.R2.BC
+	c.LatestDump.DE_ = *c.R2.DE
+	c.LatestDump.HL_ = *c.R2.HL
+	c.LatestDump.IX = *c.R1.IX
+	c.LatestDump.IY = *c.R1.IY
+	c.LatestDump.SP = *c.R1.SP
+	c.LatestDump.I = c.I
+	c.LatestDump.R = c.R
+	c.LatestDump.IFF1 = c.IFF1
+	c.LatestDump.IFF2 = c.IFF2
 }
 
 func (c *Context) Execute() {
