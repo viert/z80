@@ -16,6 +16,9 @@ import (
 
 const (
 
+    T_LENGTH = 285.7142857142857 * 2
+    T_STATES_TO_BREAK = 35000
+
 	// Flags for doIncDec()
 	ID_INC = false
 	ID_DEC = true
