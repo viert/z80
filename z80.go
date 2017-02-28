@@ -113,6 +113,7 @@ type Context struct {
 	opcodes_FDCB Z80OpcodeTable
 
 	debug bool
+	stop  bool
 }
 
 func doOff(addr uint16, off int) uint16 {
@@ -136,10 +137,48 @@ func doComplement(v byte) int {
 func NewContext(debug bool) *Context {
 	c := new(Context)
 	c.debug = debug
+	c.stop = false
 	c.createTables()
 	c.R1 = NewRegisterSet()
 	c.R2 = NewRegisterSet()
 	return c
+}
+
+func (c *Context) Disassemble(addr uint16) string {
+	var opcode byte
+	var offset int = 0
+	var result string = "OP_INVALID"
+	currentTable := &c.opcodes_main
+	tableEntries := currentTable.entries
+	for {
+		opcode = c.read8(addr + uint16(offset))
+		addr++
+		opfunc := tableEntries[opcode].function
+		if opfunc != nil {
+			entry := tableEntries[opcode]
+			switch entry.operandType {
+			case OP_NONE:
+				result = fmt.Sprintf(entry.format)
+			case OP_BYTE:
+				dByte := c.read8(addr)
+				result = fmt.Sprintf(entry.format, dByte)
+			case OP_OFFSET:
+				dInt := int8(c.read(addr))
+				result = fmt.Sprintf(entry.format, dInt)
+			case OP_WORD:
+				dWord := c.read16(addr)
+				result = fmt.Sprintf(entry.format, dWord)
+			}
+			break
+		} else if tableEntries[opcode].nextTable != nil {
+			currentTable = tableEntries[opcode].nextTable
+			tableEntries = currentTable.entries
+			offset = currentTable.opcodeOffset
+		} else {
+			break
+		}
+	}
+	return result
 }
 
 func (c *Context) doExecute() {
@@ -189,7 +228,6 @@ func (c *Context) doExecute() {
 				c.decr()
 			}
 		} else {
-			// NOP
 			break
 		}
 	}
@@ -214,6 +252,10 @@ func (c *Context) copyDump() {
 	c.LatestDump.IFF2 = c.IFF2
 }
 
+func (c *Context) Stop() {
+	c.stop = true
+}
+
 func (c *Context) Execute() {
 	if c.nmiRequested {
 		c.doNmi()
@@ -228,8 +270,13 @@ func (c *Context) Execute() {
 func (c *Context) ExecuteTStates(tstates uint64) uint64 {
 	c.TStates = 0
 	for c.TStates < tstates {
+		if c.stop {
+			c.stop = false
+			break
+		}
 		c.Execute()
 	}
+
 	return c.TStates
 }
 
