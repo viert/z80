@@ -163,7 +163,7 @@ func (c *Context) Disassemble(addr uint16) string {
 				dByte := c.read8(addr)
 				result = fmt.Sprintf(entry.format, dByte)
 			case OP_OFFSET:
-				dInt := int8(c.read(addr))
+				dInt := int8(c.read8(addr))
 				result = fmt.Sprintf(entry.format, dInt)
 			case OP_WORD:
 				dWord := c.read16(addr)
