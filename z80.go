@@ -160,15 +160,15 @@ func (c *Context) RemoveBreakpoint(addr uint16) {
 	}
 }
 
-func (c *Context) Disassemble(addr uint16) (string, int) {
+func (c *Context) Disassemble(addr uint16) (string, uint16) {
 	var opcode byte
-	var offset int = 0
+	var offset uint16 = 0
+    var arglen uint16 = 0
 	var result string = "OP_INVALID"
-    var arglen = 0
 	currentTable := &c.opcodes_main
 	tableEntries := currentTable.entries
 	for {
-		opcode = c.read8(addr + uint16(offset))
+		opcode = c.read8(addr + offset)
 		addr++
 		opfunc := tableEntries[opcode].function
 		if opfunc != nil {
@@ -198,7 +198,7 @@ func (c *Context) Disassemble(addr uint16) (string, int) {
 			break
 		}
 	}
-	return result, offset + 1 + arglen
+	return result, addr + offset + arglen + 1
 }
 
 func (c *Context) doExecute() {
