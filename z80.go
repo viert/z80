@@ -229,10 +229,12 @@ func (c *Context) doExecute() {
 					worddata := c.read16(c.PC)
 					c.LatestInstruction = fmt.Sprintf(entry.format, worddata)
 				}
-				c.copyDump()
 			}
 			c.PC -= uint16(offset)
 			opfunc()
+            if c.debug {
+				c.copyDump()
+            }
 			c.PC += uint16(offset)
 
 			break
