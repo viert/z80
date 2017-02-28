@@ -193,7 +193,7 @@ func (c *Context) Disassemble(addr uint16) (string, uint16) {
 		} else if tableEntries[opcode].nextTable != nil {
 			currentTable = tableEntries[opcode].nextTable
 			tableEntries = currentTable.entries
-			offset = currentTable.opcodeOffset
+			offset = uint16(currentTable.opcodeOffset)
 		} else {
 			break
 		}
