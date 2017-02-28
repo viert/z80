@@ -160,7 +160,7 @@ func (c *Context) RemoveBreakpoint(addr uint16) {
 	}
 }
 
-func (c *Context) Disassemble(addr uint16) string, int {
+func (c *Context) Disassemble(addr uint16) (string, int) {
 	var opcode byte
 	var offset int = 0
 	var result string = "OP_INVALID"
