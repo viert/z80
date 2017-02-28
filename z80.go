@@ -115,7 +115,7 @@ type Context struct {
 	debug bool
 	stop  bool
 
-	breakpoints [uint16]bool
+	breakpoints map[uint16]bool
 }
 
 func doOff(addr uint16, off int) uint16 {
@@ -140,7 +140,7 @@ func NewContext(debug bool) *Context {
 	c := new(Context)
 	c.debug = debug
 	c.stop = false
-	c.breakpoints = make([uint16]bool)
+	c.breakpoints = make(map[uint16]bool)
 	c.createTables()
 	c.R1 = NewRegisterSet()
 	c.R2 = NewRegisterSet()
