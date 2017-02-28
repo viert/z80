@@ -114,6 +114,8 @@ type Context struct {
 
 	debug bool
 	stop  bool
+
+	breakpoints [uint16]bool
 }
 
 func doOff(addr uint16, off int) uint16 {
@@ -138,10 +140,21 @@ func NewContext(debug bool) *Context {
 	c := new(Context)
 	c.debug = debug
 	c.stop = false
+	c.breakpoints = make([uint16]bool)
 	c.createTables()
 	c.R1 = NewRegisterSet()
 	c.R2 = NewRegisterSet()
 	return c
+}
+
+func (c *Context) AddBreakpoint(addr uint16) {
+	c.breakpoints[addr] = true
+}
+
+func (c *Context) RemoveBreakpoint(addr uint16) {
+	if _, found := c.breakpoints[addr]; found {
+		delete(c.breakpoints, addr)
+	}
 }
 
 func (c *Context) Disassemble(addr uint16) string {
@@ -256,6 +269,10 @@ func (c *Context) Stop() {
 	c.stop = true
 }
 
+func (c *Context) Resume() {
+	c.stop = false
+}
+
 func (c *Context) Execute() {
 	if c.nmiRequested {
 		c.doNmi()
@@ -271,12 +288,14 @@ func (c *Context) ExecuteTStates(tstates uint64) uint64 {
 	c.TStates = 0
 	for c.TStates < tstates {
 		if c.stop {
-			c.stop = false
+			break
+		}
+		if c.breakpoints[c.PC] {
+			c.stop = true
 			break
 		}
 		c.Execute()
 	}
-
 	return c.TStates
 }
 
