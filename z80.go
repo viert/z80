@@ -308,7 +308,7 @@ func (c *Context) Resume() {
 }
 
 func (c *Context) Execute() uint64 {
-    c.TStates = 0
+    states := c.TStates
     c.state = "running"
 	if c.nmiRequested {
 		c.doNmi()
@@ -319,7 +319,7 @@ func (c *Context) Execute() uint64 {
 		c.doExecute()
 	}
     c.state = "stopped"
-    return c.TStates
+    return c.TStates - states
 }
 
 func (c *Context) ExecuteTStates(tstates uint64) uint64 {
