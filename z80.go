@@ -115,9 +115,10 @@ type Context struct {
 	opcodes_DDCB Z80OpcodeTable
 	opcodes_FDCB Z80OpcodeTable
 
-	debug bool
-	stop  bool
-    state string
+	debug  bool
+	stop   bool
+    state  string
+    bpmode bool
 
 	breakpoints map[uint16]bool
 }
@@ -145,6 +146,7 @@ func NewContext(debug bool) *Context {
 	c.debug = debug
 	c.stop = false
     c.state = "idle"
+    c.bpmode = false
 	c.breakpoints = make(map[uint16]bool)
 	c.createTables()
 	c.R1 = NewRegisterSet()
@@ -154,6 +156,14 @@ func NewContext(debug bool) *Context {
 
 func (c *Context) State() string {
     return c.state
+}
+
+func (c *Context) SetBPMode(value bool) {
+    c.bpmode = value
+}
+
+func (c *Context) GetBPMode() bool {
+    return c.bpmode
 }
 
 func (c *Context) AddBreakpoint(addr uint16) {
@@ -317,8 +327,8 @@ func (c *Context) ExecuteTStates(tstates uint64) uint64 {
             c.state = "stopped"
 			break
 		}
-		if c.breakpoints[c.PC] {
-            c.state = fmt.Sprintf("stopped at brk %04X", c.PC)
+		if c.bpmode && c.breakpoints[c.PC] {
+            c.state = fmt.Sprintf("stopped at brkp %04X", c.PC)
 			c.stop = true
 			break
 		}
