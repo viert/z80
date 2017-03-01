@@ -117,6 +117,7 @@ type Context struct {
 
 	debug bool
 	stop  bool
+    state string
 
 	breakpoints map[uint16]bool
 }
@@ -143,11 +144,16 @@ func NewContext(debug bool) *Context {
 	c := new(Context)
 	c.debug = debug
 	c.stop = false
+    c.state = "idle"
 	c.breakpoints = make(map[uint16]bool)
 	c.createTables()
 	c.R1 = NewRegisterSet()
 	c.R2 = NewRegisterSet()
 	return c
+}
+
+func (c *Context) State() string {
+    return c.state
 }
 
 func (c *Context) AddBreakpoint(addr uint16) {
@@ -288,9 +294,11 @@ func (c *Context) Stop() {
 
 func (c *Context) Resume() {
 	c.stop = false
+    c.state = "idle"
 }
 
 func (c *Context) Execute() {
+    c.state = "running"
 	if c.nmiRequested {
 		c.doNmi()
 	} else if c.intRequested && !c.deferInt && c.IFF1 {
@@ -299,15 +307,18 @@ func (c *Context) Execute() {
 		c.deferInt = false
 		c.doExecute()
 	}
+    c.state = "stopped"
 }
 
 func (c *Context) ExecuteTStates(tstates uint64) uint64 {
 	c.TStates = 0
 	for c.TStates < tstates {
 		if c.stop {
+            c.state = "stopped"
 			break
 		}
 		if c.breakpoints[c.PC] {
+            c.state = fmt.Sprintf("stopped at brk %04X", c.PC)
 			c.stop = true
 			break
 		}
