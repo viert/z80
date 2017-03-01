@@ -160,6 +160,14 @@ func (c *Context) RemoveBreakpoint(addr uint16) {
 	}
 }
 
+func (c *Context) GetBreakpoints() {
+    bpList := make([]uint16, 0)
+    for key, _ := range c.breakpoints {
+        bpList = append(bpList, key)
+    }
+    return bpList
+}
+
 func (c *Context) Disassemble(addr uint16) (string, uint16) {
 	var opcode byte
 	var offset uint16 = 0
