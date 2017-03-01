@@ -307,7 +307,8 @@ func (c *Context) Resume() {
     c.state = "idle"
 }
 
-func (c *Context) Execute() {
+func (c *Context) Execute() uint64 {
+    c.Tstates = 0
     c.state = "running"
 	if c.nmiRequested {
 		c.doNmi()
@@ -318,6 +319,7 @@ func (c *Context) Execute() {
 		c.doExecute()
 	}
     c.state = "stopped"
+    return c.Tstates
 }
 
 func (c *Context) ExecuteTStates(tstates uint64) uint64 {
