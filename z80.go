@@ -222,7 +222,7 @@ func (c *Context) Disassemble(addr uint16) (string, uint16) {
 			break
 		}
 	}
-	return result, addr + offset + arglen + 1
+	return result, addr + offset + arglen
 }
 
 func (c *Context) doExecute() {
