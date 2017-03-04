@@ -104,8 +104,8 @@ type Context struct {
 	execIntVector bool
 
 	/* Debug assistance */
-	LatestInstruction string
-	LatestDump        RegisterDump
+//	LatestInstruction string
+//	LatestDump        RegisterDump
 
 	opcodes_main Z80OpcodeTable
 	opcodes_DD   Z80OpcodeTable
@@ -156,6 +156,27 @@ func NewContext(debug bool) *Context {
 
 func (c *Context) State() string {
     return c.state
+}
+
+func (c *Context) GetRegisterDump() *RegisterDump {
+    dump := new(RegisterDump)
+    dump.PC = c.PC
+	dump.AF = *c.R1.AF
+	dump.BC = *c.R1.BC
+	dump.DE = *c.R1.DE
+	dump.HL = *c.R1.HL
+	dump.AF_ = *c.R2.AF
+	dump.BC_ = *c.R2.BC
+	dump.DE_ = *c.R2.DE
+	dump.HL_ = *c.R2.HL
+	dump.IX = *c.R1.IX
+	dump.IY = *c.R1.IY
+	dump.SP = *c.R1.SP
+	dump.I = c.I
+	dump.R = c.R
+	dump.IFF1 = c.IFF1
+	dump.IFF2 = c.IFF2
+    return dump
 }
 
 func (c *Context) SetBPMode(value bool) {
@@ -242,7 +263,7 @@ func (c *Context) doExecute() {
 		c.incr()
 		opfunc := tableEntries[opcode].function
 		if opfunc != nil {
-			if c.debug {
+/*			if c.debug {
 				entry := tableEntries[opcode]
 				switch entry.operandType {
 				case OP_NONE:
@@ -257,12 +278,9 @@ func (c *Context) doExecute() {
 					worddata := c.read16(c.PC)
 					c.LatestInstruction = fmt.Sprintf(entry.format, worddata)
 				}
-			}
+			} */
 			c.PC -= uint16(offset)
 			opfunc()
-            if c.debug {
-				c.copyDump()
-            }
 			c.PC += uint16(offset)
 
 			break
@@ -277,25 +295,6 @@ func (c *Context) doExecute() {
 			break
 		}
 	}
-}
-
-func (c *Context) copyDump() {
-	c.LatestDump.PC = c.PC
-	c.LatestDump.AF = *c.R1.AF
-	c.LatestDump.BC = *c.R1.BC
-	c.LatestDump.DE = *c.R1.DE
-	c.LatestDump.HL = *c.R1.HL
-	c.LatestDump.AF_ = *c.R2.AF
-	c.LatestDump.BC_ = *c.R2.BC
-	c.LatestDump.DE_ = *c.R2.DE
-	c.LatestDump.HL_ = *c.R2.HL
-	c.LatestDump.IX = *c.R1.IX
-	c.LatestDump.IY = *c.R1.IY
-	c.LatestDump.SP = *c.R1.SP
-	c.LatestDump.I = c.I
-	c.LatestDump.R = c.R
-	c.LatestDump.IFF1 = c.IFF1
-	c.LatestDump.IFF2 = c.IFF2
 }
 
 func (c *Context) Stop() {
