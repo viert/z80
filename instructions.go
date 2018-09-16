@@ -2528,56 +2528,56 @@ func (c *Context) im_2() {
 }
 
 func (c *Context) in_A_off_C() {
-	*c.R1.A = c.IoRead(*c.R1.BC)
+	*c.R1.A = c.ioread(*c.R1.BC)
 	c.resFlag(F_H | F_N)
 	c.adjustFlagSZP(*c.R1.A)
 	c.adjustFlags(*c.R1.A)
 }
 
 func (c *Context) in_B_off_C() {
-	*c.R1.B = c.IoRead(*c.R1.BC)
+	*c.R1.B = c.ioread(*c.R1.BC)
 	c.resFlag(F_H | F_N)
 	c.adjustFlagSZP(*c.R1.B)
 	c.adjustFlags(*c.R1.B)
 }
 
 func (c *Context) in_C_off_C() {
-	*c.R1.C = c.IoRead(*c.R1.BC)
+	*c.R1.C = c.ioread(*c.R1.BC)
 	c.resFlag(F_H | F_N)
 	c.adjustFlagSZP(*c.R1.C)
 	c.adjustFlags(*c.R1.C)
 }
 
 func (c *Context) in_D_off_C() {
-	*c.R1.D = c.IoRead(*c.R1.BC)
+	*c.R1.D = c.ioread(*c.R1.BC)
 	c.resFlag(F_H | F_N)
 	c.adjustFlagSZP(*c.R1.D)
 	c.adjustFlags(*c.R1.D)
 }
 
 func (c *Context) in_E_off_C() {
-	*c.R1.E = c.IoRead(*c.R1.BC)
+	*c.R1.E = c.ioread(*c.R1.BC)
 	c.resFlag(F_H | F_N)
 	c.adjustFlagSZP(*c.R1.E)
 	c.adjustFlags(*c.R1.E)
 }
 
 func (c *Context) in_F_off_C() {
-	*c.R1.F = c.IoRead(*c.R1.BC)
+	*c.R1.F = c.ioread(*c.R1.BC)
 	c.resFlag(F_H | F_N)
 	c.adjustFlagSZP(*c.R1.F)
 	c.adjustFlags(*c.R1.F)
 }
 
 func (c *Context) in_H_off_C() {
-	*c.R1.H = c.IoRead(*c.R1.BC)
+	*c.R1.H = c.ioread(*c.R1.BC)
 	c.resFlag(F_H | F_N)
 	c.adjustFlagSZP(*c.R1.H)
 	c.adjustFlags(*c.R1.H)
 }
 
 func (c *Context) in_L_off_C() {
-	*c.R1.L = c.IoRead(*c.R1.BC)
+	*c.R1.L = c.ioread(*c.R1.BC)
 	c.resFlag(F_H | F_N)
 	c.adjustFlagSZP(*c.R1.L)
 	c.adjustFlags(*c.R1.L)
@@ -2587,7 +2587,7 @@ func (c *Context) in_A_off_n() {
 	port := uint16(c.read8(c.PC))
 	c.PC++
 	port = uint16(*c.R1.A)<<8 | port
-	*c.R1.A = c.IoRead(port)
+	*c.R1.A = c.ioread(port)
 }
 
 func (c *Context) indr() {
@@ -2600,7 +2600,7 @@ func (c *Context) indr() {
 
 func (c *Context) ind() {
 	c.TStates += 1
-	val := c.IoRead(*c.R1.BC)
+	val := c.ioread(*c.R1.BC)
 	c.write8(*c.R1.HL, val)
 	*c.R1.HL--
 	*c.R1.B = c.doIncDec(*c.R1.B, ID_DEC)
@@ -2621,7 +2621,7 @@ func (c *Context) inir() {
 
 func (c *Context) ini() {
 	c.TStates += 1
-	val := c.IoRead(*c.R1.BC)
+	val := c.ioread(*c.R1.BC)
 	c.write8(*c.R1.HL, val)
 	*c.R1.HL++
 	*c.R1.B = c.doIncDec(*c.R1.B, ID_DEC)
@@ -2636,7 +2636,7 @@ func (c *Context) outi() {
 	c.TStates += 1
 	value := c.read8(*c.R1.HL)
 	*c.R1.B = c.doIncDec(*c.R1.B, ID_DEC)
-	c.IoWrite(*c.R1.BC, value)
+	c.iowrite(*c.R1.BC, value)
 	*c.R1.HL++
 	flag_value := int(value) + int(*c.R1.L)
 	c.valFlag(F_N, value&0x80 != 0)
@@ -2658,7 +2658,7 @@ func (c *Context) outd() {
 	c.TStates += 1
 	value := c.read8(*c.R1.HL)
 	*c.R1.B = c.doIncDec(*c.R1.B, ID_DEC)
-	c.IoWrite(*c.R1.BC, value)
+	c.iowrite(*c.R1.BC, value)
 	*c.R1.HL--
 	flag_value := int(value) + int(*c.R1.L)
 	c.valFlag(F_N, value&0x80 != 0)
@@ -2677,42 +2677,42 @@ func (c *Context) otdr() {
 }
 
 func (c *Context) out_off_C_0() {
-	c.IoWrite(*c.R1.BC, 0)
+	c.iowrite(*c.R1.BC, 0)
 }
 
 func (c *Context) out_off_C_A() {
-	c.IoWrite(*c.R1.BC, *c.R1.A)
+	c.iowrite(*c.R1.BC, *c.R1.A)
 }
 
 func (c *Context) out_off_C_B() {
-	c.IoWrite(*c.R1.BC, *c.R1.B)
+	c.iowrite(*c.R1.BC, *c.R1.B)
 }
 
 func (c *Context) out_off_C_C() {
-	c.IoWrite(*c.R1.BC, *c.R1.C)
+	c.iowrite(*c.R1.BC, *c.R1.C)
 }
 
 func (c *Context) out_off_C_D() {
-	c.IoWrite(*c.R1.BC, *c.R1.D)
+	c.iowrite(*c.R1.BC, *c.R1.D)
 }
 
 func (c *Context) out_off_C_E() {
-	c.IoWrite(*c.R1.BC, *c.R1.E)
+	c.iowrite(*c.R1.BC, *c.R1.E)
 }
 
 func (c *Context) out_off_C_H() {
-	c.IoWrite(*c.R1.BC, *c.R1.H)
+	c.iowrite(*c.R1.BC, *c.R1.H)
 }
 
 func (c *Context) out_off_C_L() {
-	c.IoWrite(*c.R1.BC, *c.R1.L)
+	c.iowrite(*c.R1.BC, *c.R1.L)
 }
 
 func (c *Context) out_off_n_A() {
 	port := uint16(c.read8(c.PC))
 	c.PC++
 	port = uint16(*c.R1.A)<<8 | port
-	c.IoWrite(port, *c.R1.A)
+	c.iowrite(port, *c.R1.A)
 }
 
 func (c *Context) pop_AF() {

@@ -343,7 +343,18 @@ func (c *Context) unhalt() {
 	}
 }
 
+func (c *Context) ioread(addr uint16) byte {
+	c.TStates += 4
+	return c.IoRead(addr)
+}
+
+func (c *Context) iowrite(addr uint16, value byte) {
+	c.TStates += 4
+	c.IoWrite(addr, value)
+}
+
 func (c *Context) read8(addr uint16) byte {
+	c.TStates += 3
 	return c.MemoryRead(addr)
 }
 
@@ -354,14 +365,15 @@ func (c *Context) read16(addr uint16) uint16 {
 }
 
 func (c *Context) write8(addr uint16, data byte) {
+	c.TStates += 3
 	c.MemoryWrite(addr, data)
 }
 
 func (c *Context) write16(addr uint16, data uint16) {
 	low := byte(data & 0xFF)
 	high := byte((data >> 8) & 0xFF)
-	c.MemoryWrite(addr, low)
-	c.MemoryWrite(addr+1, high)
+	c.write8(addr, low)
+	c.write8(addr+1, high)
 }
 
 func (c *Context) doAddWord(a1 uint16, a2 uint16, withCarry bool, isSub bool) uint16 {
