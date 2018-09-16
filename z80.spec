@@ -64,7 +64,8 @@ BIT [0-7],(HL)
 
 BIT [0-7],([IX,IY]+d)
 	c.TStates += 2
-	address := uint16(int32(*c.R1.$2) + int32(c.read8(c.PC)))
+	displacement := int8(c.read8(c.PC))
+	address := uint16(int32(*c.R1.$2) + int32(displacement))
 	c.PC++
 	c.doBIT_indexed($1, address)
 

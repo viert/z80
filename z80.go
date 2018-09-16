@@ -355,7 +355,11 @@ func (c *Context) iowrite(addr uint16, value byte) {
 
 func (c *Context) read8(addr uint16) byte {
 	c.TStates += 3
-	return c.MemoryRead(addr)
+	data := c.MemoryRead(addr)
+	if c.debug {
+		fmt.Printf("Reading memory address 0x%04X = 0x%02X\n", addr, data)
+	}
+	return data
 }
 
 func (c *Context) read16(addr uint16) uint16 {
@@ -366,6 +370,9 @@ func (c *Context) read16(addr uint16) uint16 {
 
 func (c *Context) write8(addr uint16, data byte) {
 	c.TStates += 3
+	if c.debug {
+		fmt.Printf("Writing 0x%02X to memory address 0x%04X", data, addr)
+	}
 	c.MemoryWrite(addr, data)
 }
 

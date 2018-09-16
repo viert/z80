@@ -859,112 +859,128 @@ func (c *Context) bit_7_off_HL() {
 
 func (c *Context) bit_0_off_IX_d() {
 	c.TStates += 2
-	address := uint16(int32(*c.R1.IX) + int32(c.read8(c.PC)))
+	displacement := int8(c.read8(c.PC))
+	address := uint16(int32(*c.R1.IX) + int32(displacement))
 	c.PC++
 	c.doBIT_indexed(0, address)
 }
 
 func (c *Context) bit_0_off_IY_d() {
 	c.TStates += 2
-	address := uint16(int32(*c.R1.IY) + int32(c.read8(c.PC)))
+	displacement := int8(c.read8(c.PC))
+	address := uint16(int32(*c.R1.IY) + int32(displacement))
 	c.PC++
 	c.doBIT_indexed(0, address)
 }
 
 func (c *Context) bit_1_off_IX_d() {
 	c.TStates += 2
-	address := uint16(int32(*c.R1.IX) + int32(c.read8(c.PC)))
+	displacement := int8(c.read8(c.PC))
+	address := uint16(int32(*c.R1.IX) + int32(displacement))
 	c.PC++
 	c.doBIT_indexed(1, address)
 }
 
 func (c *Context) bit_1_off_IY_d() {
 	c.TStates += 2
-	address := uint16(int32(*c.R1.IY) + int32(c.read8(c.PC)))
+	displacement := int8(c.read8(c.PC))
+	address := uint16(int32(*c.R1.IY) + int32(displacement))
 	c.PC++
 	c.doBIT_indexed(1, address)
 }
 
 func (c *Context) bit_2_off_IX_d() {
 	c.TStates += 2
-	address := uint16(int32(*c.R1.IX) + int32(c.read8(c.PC)))
+	displacement := int8(c.read8(c.PC))
+	address := uint16(int32(*c.R1.IX) + int32(displacement))
 	c.PC++
 	c.doBIT_indexed(2, address)
 }
 
 func (c *Context) bit_2_off_IY_d() {
 	c.TStates += 2
-	address := uint16(int32(*c.R1.IY) + int32(c.read8(c.PC)))
+	displacement := int8(c.read8(c.PC))
+	address := uint16(int32(*c.R1.IY) + int32(displacement))
 	c.PC++
 	c.doBIT_indexed(2, address)
 }
 
 func (c *Context) bit_3_off_IX_d() {
 	c.TStates += 2
-	address := uint16(int32(*c.R1.IX) + int32(c.read8(c.PC)))
+	displacement := int8(c.read8(c.PC))
+	address := uint16(int32(*c.R1.IX) + int32(displacement))
 	c.PC++
 	c.doBIT_indexed(3, address)
 }
 
 func (c *Context) bit_3_off_IY_d() {
 	c.TStates += 2
-	address := uint16(int32(*c.R1.IY) + int32(c.read8(c.PC)))
+	displacement := int8(c.read8(c.PC))
+	address := uint16(int32(*c.R1.IY) + int32(displacement))
 	c.PC++
 	c.doBIT_indexed(3, address)
 }
 
 func (c *Context) bit_4_off_IX_d() {
 	c.TStates += 2
-	address := uint16(int32(*c.R1.IX) + int32(c.read8(c.PC)))
+	displacement := int8(c.read8(c.PC))
+	address := uint16(int32(*c.R1.IX) + int32(displacement))
 	c.PC++
 	c.doBIT_indexed(4, address)
 }
 
 func (c *Context) bit_4_off_IY_d() {
 	c.TStates += 2
-	address := uint16(int32(*c.R1.IY) + int32(c.read8(c.PC)))
+	displacement := int8(c.read8(c.PC))
+	address := uint16(int32(*c.R1.IY) + int32(displacement))
 	c.PC++
 	c.doBIT_indexed(4, address)
 }
 
 func (c *Context) bit_5_off_IX_d() {
 	c.TStates += 2
-	address := uint16(int32(*c.R1.IX) + int32(c.read8(c.PC)))
+	displacement := int8(c.read8(c.PC))
+	address := uint16(int32(*c.R1.IX) + int32(displacement))
 	c.PC++
 	c.doBIT_indexed(5, address)
 }
 
 func (c *Context) bit_5_off_IY_d() {
 	c.TStates += 2
-	address := uint16(int32(*c.R1.IY) + int32(c.read8(c.PC)))
+	displacement := int8(c.read8(c.PC))
+	address := uint16(int32(*c.R1.IY) + int32(displacement))
 	c.PC++
 	c.doBIT_indexed(5, address)
 }
 
 func (c *Context) bit_6_off_IX_d() {
 	c.TStates += 2
-	address := uint16(int32(*c.R1.IX) + int32(c.read8(c.PC)))
+	displacement := int8(c.read8(c.PC))
+	address := uint16(int32(*c.R1.IX) + int32(displacement))
 	c.PC++
 	c.doBIT_indexed(6, address)
 }
 
 func (c *Context) bit_6_off_IY_d() {
 	c.TStates += 2
-	address := uint16(int32(*c.R1.IY) + int32(c.read8(c.PC)))
+	displacement := int8(c.read8(c.PC))
+	address := uint16(int32(*c.R1.IY) + int32(displacement))
 	c.PC++
 	c.doBIT_indexed(6, address)
 }
 
 func (c *Context) bit_7_off_IX_d() {
 	c.TStates += 2
-	address := uint16(int32(*c.R1.IX) + int32(c.read8(c.PC)))
+	displacement := int8(c.read8(c.PC))
+	address := uint16(int32(*c.R1.IX) + int32(displacement))
 	c.PC++
 	c.doBIT_indexed(7, address)
 }
 
 func (c *Context) bit_7_off_IY_d() {
 	c.TStates += 2
-	address := uint16(int32(*c.R1.IY) + int32(c.read8(c.PC)))
+	displacement := int8(c.read8(c.PC))
+	address := uint16(int32(*c.R1.IY) + int32(displacement))
 	c.PC++
 	c.doBIT_indexed(7, address)
 }

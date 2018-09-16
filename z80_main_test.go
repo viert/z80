@@ -18,5589 +18,6 @@ func TestMain(m *testing.M) {
 }
 
 
-func Test10(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0000
-  *c.R1.BC = 0x0800
-  *c.R1.DE = 0x0000
-  *c.R1.HL = 0x0000
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x00
-  mem[0x0001] = 0x10
-  mem[0x0002] = 0xFD
-  mem[0x0003] = 0x0C
-  for c.TStates < 135 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0000) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0000, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0x0001) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0001, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x0000) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x0000, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0x0000) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0x0000, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x11) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x11, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 135) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 135, c.TStates)
-  }
-}
-
-func Test11(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0000
-  *c.R1.BC = 0x0000
-  *c.R1.DE = 0x0000
-  *c.R1.HL = 0x0000
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x11
-  mem[0x0001] = 0x9A
-  mem[0x0002] = 0xBC
-  for c.TStates < 10 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0000) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0000, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0x0000) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0000, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0xBC9A) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0xBC9A, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0x0000) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0x0000, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 10) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 10, c.TStates)
-  }
-}
-
-func Test12(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x5600
-  *c.R1.BC = 0x0000
-  *c.R1.DE = 0x8000
-  *c.R1.HL = 0x0000
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x12
-  for c.TStates < 7 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x5600) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x5600, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0x0000) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0000, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x8000) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x8000, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0x0000) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0x0000, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 7) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 7, c.TStates)
-  }
-}
-
-func Test13(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0000
-  *c.R1.BC = 0x0000
-  *c.R1.DE = 0xDEF0
-  *c.R1.HL = 0x0000
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x13
-  for c.TStates < 6 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0000) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0000, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0x0000) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0000, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0xDEF1) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0xDEF1, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0x0000) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0x0000, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 6) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 6, c.TStates)
-  }
-}
-
-func Test14(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0000
-  *c.R1.BC = 0x0000
-  *c.R1.DE = 0x2700
-  *c.R1.HL = 0x0000
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x14
-  for c.TStates < 4 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0028) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0028, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0x0000) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0000, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x2800) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x2800, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0x0000) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0x0000, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 4) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
-  }
-}
-
-func Test15(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0000
-  *c.R1.BC = 0x0000
-  *c.R1.DE = 0x1000
-  *c.R1.HL = 0x0000
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x15
-  for c.TStates < 4 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x001A) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x001A, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0x0000) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0000, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x0F00) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x0F00, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0x0000) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0x0000, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 4) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
-  }
-}
-
-func Test16(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0000
-  *c.R1.BC = 0x0000
-  *c.R1.DE = 0x0000
-  *c.R1.HL = 0x0000
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x16
-  mem[0x0001] = 0x12
-  for c.TStates < 7 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0000) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0000, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0x0000) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0000, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x1200) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x1200, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0x0000) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0x0000, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 7) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 7, c.TStates)
-  }
-}
-
-func Test17(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0801
-  *c.R1.BC = 0x0000
-  *c.R1.DE = 0x0000
-  *c.R1.HL = 0x0000
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x17
-  for c.TStates < 4 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x1100) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x1100, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0x0000) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0000, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x0000) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x0000, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0x0000) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0x0000, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 4) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
-  }
-}
-
-func Test18(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0000
-  *c.R1.BC = 0x0000
-  *c.R1.DE = 0x0000
-  *c.R1.HL = 0x0000
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x18
-  mem[0x0001] = 0x40
-  for c.TStates < 12 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0000) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0000, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0x0000) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0000, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x0000) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x0000, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0x0000) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0x0000, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 12) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 12, c.TStates)
-  }
-}
-
-func Test19(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0000
-  *c.R1.BC = 0x0000
-  *c.R1.DE = 0x3456
-  *c.R1.HL = 0x789A
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x19
-  for c.TStates < 11 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0028) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0028, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0x0000) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0000, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x3456) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x3456, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0xACF0) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0xACF0, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 11) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 11, c.TStates)
-  }
-}
-
-func Test21(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0000
-  *c.R1.BC = 0x0000
-  *c.R1.DE = 0x0000
-  *c.R1.HL = 0x0000
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x21
-  mem[0x0001] = 0x28
-  mem[0x0002] = 0xED
-  for c.TStates < 10 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0000) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0000, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0x0000) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0000, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x0000) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x0000, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0xED28) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0xED28, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 10) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 10, c.TStates)
-  }
-}
-
-func Test22(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0000
-  *c.R1.BC = 0x0000
-  *c.R1.DE = 0x0000
-  *c.R1.HL = 0xC64C
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x22
-  mem[0x0001] = 0xB0
-  mem[0x0002] = 0xC3
-  for c.TStates < 16 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0000) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0000, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0x0000) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0000, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x0000) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x0000, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0xC64C) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0xC64C, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 16) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 16, c.TStates)
-  }
-}
-
-func Test23(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0000
-  *c.R1.BC = 0x0000
-  *c.R1.DE = 0x0000
-  *c.R1.HL = 0x9C4E
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x23
-  for c.TStates < 6 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0000) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0000, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0x0000) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0000, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x0000) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x0000, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0x9C4F) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0x9C4F, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 6) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 6, c.TStates)
-  }
-}
-
-func Test24(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0000
-  *c.R1.BC = 0x0000
-  *c.R1.DE = 0x0000
-  *c.R1.HL = 0x7200
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x24
-  for c.TStates < 4 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0020) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0020, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0x0000) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0000, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x0000) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x0000, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0x7300) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0x7300, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 4) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
-  }
-}
-
-func Test25(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0000
-  *c.R1.BC = 0x0000
-  *c.R1.DE = 0x0000
-  *c.R1.HL = 0xA500
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x25
-  for c.TStates < 4 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x00A2) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x00A2, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0x0000) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0000, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x0000) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x0000, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0xA400) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA400, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 4) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
-  }
-}
-
-func Test26(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0000
-  *c.R1.BC = 0x0000
-  *c.R1.DE = 0x0000
-  *c.R1.HL = 0x0000
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x26
-  mem[0x0001] = 0x3A
-  for c.TStates < 7 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0000) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0000, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0x0000) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0000, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x0000) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x0000, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0x3A00) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0x3A00, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 7) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 7, c.TStates)
-  }
-}
-
-func Test27(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x1F00
-  *c.R1.BC = 0x0000
-  *c.R1.DE = 0x0000
-  *c.R1.HL = 0x0000
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x27
-  for c.TStates < 4 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x2530) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x2530, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0x0000) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0000, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x0000) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x0000, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0x0000) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0x0000, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 4) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
-  }
-}
-
-func Test29(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0000
-  *c.R1.BC = 0x0000
-  *c.R1.DE = 0x0000
-  *c.R1.HL = 0xCDFA
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x29
-  for c.TStates < 11 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0019) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0019, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0x0000) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0000, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x0000) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x0000, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0x9BF4) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0x9BF4, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 11) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 11, c.TStates)
-  }
-}
-
-func Test31(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0000
-  *c.R1.BC = 0x0000
-  *c.R1.DE = 0x0000
-  *c.R1.HL = 0x0000
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x31
-  mem[0x0001] = 0xD4
-  mem[0x0002] = 0x61
-  for c.TStates < 10 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0000) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0000, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0x0000) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0000, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x0000) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x0000, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0x0000) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0x0000, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x61D4) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x61D4, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 10) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 10, c.TStates)
-  }
-}
-
-func Test32(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0E00
-  *c.R1.BC = 0x0000
-  *c.R1.DE = 0x0000
-  *c.R1.HL = 0x0000
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x32
-  mem[0x0001] = 0xAC
-  mem[0x0002] = 0xAD
-  for c.TStates < 13 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0E00) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0E00, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0x0000) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0000, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x0000) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x0000, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0x0000) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0x0000, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 13) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 13, c.TStates)
-  }
-}
-
-func Test33(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0000
-  *c.R1.BC = 0x0000
-  *c.R1.DE = 0x0000
-  *c.R1.HL = 0x0000
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0xA55A
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x33
-  for c.TStates < 6 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0000) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0000, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0x0000) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0000, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x0000) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x0000, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0x0000) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0x0000, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0xA55B) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0xA55B, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 6) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 6, c.TStates)
-  }
-}
-
-func Test34(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0000
-  *c.R1.BC = 0x0000
-  *c.R1.DE = 0x0000
-  *c.R1.HL = 0xFE1D
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x34
-  mem[0xFE1D] = 0xFD
-  for c.TStates < 11 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x00A8) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x00A8, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0x0000) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0000, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x0000) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x0000, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0xFE1D) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0xFE1D, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 11) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 11, c.TStates)
-  }
-}
-
-func Test35(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0000
-  *c.R1.BC = 0x0000
-  *c.R1.DE = 0x0000
-  *c.R1.HL = 0x470C
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x35
-  mem[0x470C] = 0x82
-  for c.TStates < 11 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0082) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0082, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0x0000) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0000, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x0000) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x0000, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0x470C) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0x470C, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 11) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 11, c.TStates)
-  }
-}
-
-func Test36(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0000
-  *c.R1.BC = 0x0000
-  *c.R1.DE = 0x0000
-  *c.R1.HL = 0x7D29
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x36
-  mem[0x0001] = 0x7C
-  for c.TStates < 10 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0000) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0000, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0x0000) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0000, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x0000) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x0000, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0x7D29) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0x7D29, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 10) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 10, c.TStates)
-  }
-}
-
-func Test37(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0000
-  *c.R1.BC = 0x0000
-  *c.R1.DE = 0x0000
-  *c.R1.HL = 0x0000
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x37
-  for c.TStates < 4 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0001) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0001, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0x0000) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0000, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x0000) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x0000, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0x0000) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0x0000, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 4) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
-  }
-}
-
-func Test39(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0000
-  *c.R1.BC = 0x0000
-  *c.R1.DE = 0x0000
-  *c.R1.HL = 0x1AEF
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0xC534
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x29
-  for c.TStates < 11 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0030) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0030, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0x0000) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0000, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x0000) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x0000, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0x35DE) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0x35DE, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0xC534) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0xC534, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 11) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 11, c.TStates)
-  }
-}
-
-func Test40(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0200
-  *c.R1.BC = 0xCF98
-  *c.R1.DE = 0x90D8
-  *c.R1.HL = 0xA169
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x40
-  mem[0xA169] = 0x50
-  for c.TStates < 4 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0200) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0xCF98) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x90D8) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0xA169) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 4) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
-  }
-}
-
-func Test41(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0200
-  *c.R1.BC = 0xCF98
-  *c.R1.DE = 0x90D8
-  *c.R1.HL = 0xA169
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x41
-  mem[0xA169] = 0x50
-  for c.TStates < 4 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0200) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0x9898) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0x9898, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x90D8) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0xA169) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 4) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
-  }
-}
-
-func Test42(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0200
-  *c.R1.BC = 0xCF98
-  *c.R1.DE = 0x90D8
-  *c.R1.HL = 0xA169
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x42
-  mem[0xA169] = 0x50
-  for c.TStates < 4 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0200) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0x9098) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0x9098, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x90D8) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0xA169) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 4) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
-  }
-}
-
-func Test43(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0200
-  *c.R1.BC = 0xCF98
-  *c.R1.DE = 0x90D8
-  *c.R1.HL = 0xA169
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x43
-  mem[0xA169] = 0x50
-  for c.TStates < 4 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0200) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0xD898) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0xD898, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x90D8) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0xA169) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 4) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
-  }
-}
-
-func Test44(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0200
-  *c.R1.BC = 0xCF98
-  *c.R1.DE = 0x90D8
-  *c.R1.HL = 0xA169
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x44
-  mem[0xA169] = 0x50
-  for c.TStates < 4 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0200) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0xA198) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0xA198, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x90D8) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0xA169) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 4) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
-  }
-}
-
-func Test45(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0200
-  *c.R1.BC = 0xCF98
-  *c.R1.DE = 0x90D8
-  *c.R1.HL = 0xA169
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x45
-  mem[0xA169] = 0x50
-  for c.TStates < 4 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0200) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0x6998) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0x6998, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x90D8) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0xA169) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 4) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
-  }
-}
-
-func Test46(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0200
-  *c.R1.BC = 0xCF98
-  *c.R1.DE = 0x90D8
-  *c.R1.HL = 0xA169
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x46
-  mem[0xA169] = 0x50
-  for c.TStates < 7 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0200) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0x5098) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0x5098, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x90D8) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0xA169) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 7) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 7, c.TStates)
-  }
-}
-
-func Test47(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0200
-  *c.R1.BC = 0xCF98
-  *c.R1.DE = 0x90D8
-  *c.R1.HL = 0xA169
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x47
-  mem[0xA169] = 0x50
-  for c.TStates < 4 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0200) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0x0298) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0298, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x90D8) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0xA169) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 4) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
-  }
-}
-
-func Test48(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0200
-  *c.R1.BC = 0xCF98
-  *c.R1.DE = 0x90D8
-  *c.R1.HL = 0xA169
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x48
-  mem[0xA169] = 0x50
-  for c.TStates < 4 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0200) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0xCFCF) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCFCF, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x90D8) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0xA169) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 4) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
-  }
-}
-
-func Test49(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0200
-  *c.R1.BC = 0xCF98
-  *c.R1.DE = 0x90D8
-  *c.R1.HL = 0xA169
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x49
-  mem[0xA169] = 0x50
-  for c.TStates < 4 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0200) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0xCF98) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x90D8) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0xA169) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 4) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
-  }
-}
-
-func Test50(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0200
-  *c.R1.BC = 0xCF98
-  *c.R1.DE = 0x90D8
-  *c.R1.HL = 0xA169
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x50
-  mem[0xA169] = 0x50
-  for c.TStates < 4 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0200) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0xCF98) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0xCFD8) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0xCFD8, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0xA169) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 4) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
-  }
-}
-
-func Test51(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0200
-  *c.R1.BC = 0xCF98
-  *c.R1.DE = 0x90D8
-  *c.R1.HL = 0xA169
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x51
-  mem[0xA169] = 0x50
-  for c.TStates < 4 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0200) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0xCF98) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x98D8) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x98D8, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0xA169) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 4) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
-  }
-}
-
-func Test52(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0200
-  *c.R1.BC = 0xCF98
-  *c.R1.DE = 0x90D8
-  *c.R1.HL = 0xA169
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x52
-  mem[0xA169] = 0x50
-  for c.TStates < 4 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0200) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0xCF98) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x90D8) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0xA169) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 4) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
-  }
-}
-
-func Test53(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0200
-  *c.R1.BC = 0xCF98
-  *c.R1.DE = 0x90D8
-  *c.R1.HL = 0xA169
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x53
-  mem[0xA169] = 0x50
-  for c.TStates < 4 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0200) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0xCF98) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0xD8D8) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0xD8D8, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0xA169) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 4) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
-  }
-}
-
-func Test54(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0200
-  *c.R1.BC = 0xCF98
-  *c.R1.DE = 0x90D8
-  *c.R1.HL = 0xA169
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x54
-  mem[0xA169] = 0x50
-  for c.TStates < 4 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0200) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0xCF98) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0xA1D8) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0xA1D8, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0xA169) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 4) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
-  }
-}
-
-func Test55(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0200
-  *c.R1.BC = 0xCF98
-  *c.R1.DE = 0x90D8
-  *c.R1.HL = 0xA169
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x55
-  mem[0xA169] = 0x50
-  for c.TStates < 4 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0200) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0xCF98) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x69D8) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x69D8, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0xA169) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 4) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
-  }
-}
-
-func Test56(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0200
-  *c.R1.BC = 0xCF98
-  *c.R1.DE = 0x90D8
-  *c.R1.HL = 0xA169
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x56
-  mem[0xA169] = 0x50
-  for c.TStates < 7 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0200) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0xCF98) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x50D8) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x50D8, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0xA169) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 7) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 7, c.TStates)
-  }
-}
-
-func Test57(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0200
-  *c.R1.BC = 0xCF98
-  *c.R1.DE = 0x90D8
-  *c.R1.HL = 0xA169
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x57
-  mem[0xA169] = 0x50
-  for c.TStates < 4 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0200) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0xCF98) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x02D8) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x02D8, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0xA169) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 4) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
-  }
-}
-
-func Test58(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0200
-  *c.R1.BC = 0xCF98
-  *c.R1.DE = 0x90D8
-  *c.R1.HL = 0xA169
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x58
-  mem[0xA169] = 0x50
-  for c.TStates < 4 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0200) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0xCF98) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x90CF) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90CF, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0xA169) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 4) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
-  }
-}
-
-func Test59(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0200
-  *c.R1.BC = 0xCF98
-  *c.R1.DE = 0x90D8
-  *c.R1.HL = 0xA169
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x59
-  mem[0xA169] = 0x50
-  for c.TStates < 4 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0200) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0xCF98) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x9098) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x9098, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0xA169) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 4) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
-  }
-}
-
-func Test60(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0200
-  *c.R1.BC = 0xCF98
-  *c.R1.DE = 0x90D8
-  *c.R1.HL = 0xA169
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x60
-  mem[0xA169] = 0x50
-  for c.TStates < 4 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0200) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0xCF98) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x90D8) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0xCF69) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0xCF69, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 4) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
-  }
-}
-
-func Test61(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0200
-  *c.R1.BC = 0xCF98
-  *c.R1.DE = 0x90D8
-  *c.R1.HL = 0xA169
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x61
-  mem[0xA169] = 0x50
-  for c.TStates < 4 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0200) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0xCF98) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x90D8) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0x9869) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0x9869, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 4) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
-  }
-}
-
-func Test62(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0200
-  *c.R1.BC = 0xCF98
-  *c.R1.DE = 0x90D8
-  *c.R1.HL = 0xA169
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x62
-  mem[0xA169] = 0x50
-  for c.TStates < 4 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0200) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0xCF98) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x90D8) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0x9069) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0x9069, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 4) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
-  }
-}
-
-func Test63(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0200
-  *c.R1.BC = 0xCF98
-  *c.R1.DE = 0x90D8
-  *c.R1.HL = 0xA169
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x63
-  mem[0xA169] = 0x50
-  for c.TStates < 4 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0200) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0xCF98) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x90D8) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0xD869) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0xD869, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 4) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
-  }
-}
-
-func Test64(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0200
-  *c.R1.BC = 0xCF98
-  *c.R1.DE = 0x90D8
-  *c.R1.HL = 0xA169
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x64
-  mem[0xA169] = 0x50
-  for c.TStates < 4 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0200) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0xCF98) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x90D8) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0xA169) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 4) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
-  }
-}
-
-func Test65(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0200
-  *c.R1.BC = 0xCF98
-  *c.R1.DE = 0x90D8
-  *c.R1.HL = 0xA169
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x65
-  mem[0xA169] = 0x50
-  for c.TStates < 4 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0200) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0xCF98) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x90D8) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0x6969) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0x6969, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 4) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
-  }
-}
-
-func Test66(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0200
-  *c.R1.BC = 0xCF98
-  *c.R1.DE = 0x90D8
-  *c.R1.HL = 0xA169
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x66
-  mem[0xA169] = 0x50
-  for c.TStates < 7 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0200) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0xCF98) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x90D8) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0x5069) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0x5069, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 7) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 7, c.TStates)
-  }
-}
-
-func Test67(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0200
-  *c.R1.BC = 0xCF98
-  *c.R1.DE = 0x90D8
-  *c.R1.HL = 0xA169
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x67
-  mem[0xA169] = 0x50
-  for c.TStates < 4 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0200) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0xCF98) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x90D8) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0x0269) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0x0269, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 4) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
-  }
-}
-
-func Test68(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0200
-  *c.R1.BC = 0xCF98
-  *c.R1.DE = 0x90D8
-  *c.R1.HL = 0xA169
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x68
-  mem[0xA169] = 0x50
-  for c.TStates < 4 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0200) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0xCF98) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x90D8) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0xA1CF) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA1CF, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 4) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
-  }
-}
-
-func Test69(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0200
-  *c.R1.BC = 0xCF98
-  *c.R1.DE = 0x90D8
-  *c.R1.HL = 0xA169
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x69
-  mem[0xA169] = 0x50
-  for c.TStates < 4 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0200) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0xCF98) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x90D8) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0xA198) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA198, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 4) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
-  }
-}
-
-func Test70(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0200
-  *c.R1.BC = 0xCF98
-  *c.R1.DE = 0x90D8
-  *c.R1.HL = 0xA169
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x70
-  mem[0xA169] = 0x50
-  for c.TStates < 7 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0200) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0xCF98) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x90D8) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0xA169) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 7) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 7, c.TStates)
-  }
-}
-
-func Test71(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0200
-  *c.R1.BC = 0xCF98
-  *c.R1.DE = 0x90D8
-  *c.R1.HL = 0xA169
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x71
-  mem[0xA169] = 0x50
-  for c.TStates < 7 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0200) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0xCF98) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x90D8) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0xA169) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 7) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 7, c.TStates)
-  }
-}
-
-func Test72(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0200
-  *c.R1.BC = 0xCF98
-  *c.R1.DE = 0x90D8
-  *c.R1.HL = 0xA169
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x72
-  mem[0xA169] = 0x50
-  for c.TStates < 7 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0200) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0xCF98) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x90D8) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0xA169) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 7) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 7, c.TStates)
-  }
-}
-
-func Test73(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0200
-  *c.R1.BC = 0xCF98
-  *c.R1.DE = 0x90D8
-  *c.R1.HL = 0xA169
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x73
-  mem[0xA169] = 0x50
-  for c.TStates < 7 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0200) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0xCF98) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x90D8) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0xA169) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 7) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 7, c.TStates)
-  }
-}
-
-func Test74(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0200
-  *c.R1.BC = 0xCF98
-  *c.R1.DE = 0x90D8
-  *c.R1.HL = 0xA169
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x74
-  mem[0xA169] = 0x50
-  for c.TStates < 7 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0200) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0xCF98) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x90D8) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0xA169) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 7) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 7, c.TStates)
-  }
-}
-
-func Test75(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0200
-  *c.R1.BC = 0xCF98
-  *c.R1.DE = 0x90D8
-  *c.R1.HL = 0xA169
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x75
-  mem[0xA169] = 0x50
-  for c.TStates < 7 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0200) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0xCF98) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x90D8) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0xA169) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 7) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 7, c.TStates)
-  }
-}
-
-func Test76(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0200
-  *c.R1.BC = 0xCF98
-  *c.R1.DE = 0x90D8
-  *c.R1.HL = 0xA169
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x76
-  mem[0xA169] = 0x50
-  for c.TStates < 4 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0200) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0xCF98) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x90D8) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0xA169) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 4) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
-  }
-}
-
-func Test77(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0200
-  *c.R1.BC = 0xCF98
-  *c.R1.DE = 0x90D8
-  *c.R1.HL = 0xA169
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x77
-  mem[0xA169] = 0x50
-  for c.TStates < 7 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0200) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0xCF98) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x90D8) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0xA169) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 7) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 7, c.TStates)
-  }
-}
-
-func Test78(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0200
-  *c.R1.BC = 0xCF98
-  *c.R1.DE = 0x90D8
-  *c.R1.HL = 0xA169
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x78
-  mem[0xA169] = 0x50
-  for c.TStates < 4 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0xCF00) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0xCF00, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0xCF98) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x90D8) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0xA169) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 4) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
-  }
-}
-
-func Test79(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0x0200
-  *c.R1.BC = 0xCF98
-  *c.R1.DE = 0x90D8
-  *c.R1.HL = 0xA169
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x79
-  mem[0xA169] = 0x50
-  for c.TStates < 4 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x9800) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x9800, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0xCF98) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x90D8) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0xA169) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 4) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
-  }
-}
-
-func Test80(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0xF500
-  *c.R1.BC = 0x0F3B
-  *c.R1.DE = 0x200D
-  *c.R1.HL = 0xDCA6
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x80
-  mem[0xDCA6] = 0x49
-  for c.TStates < 4 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0411) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0411, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0x0F3B) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0F3B, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x200D) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x200D, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0xDCA6) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0xDCA6, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 4) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
-  }
-}
-
-func Test81(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0xF500
-  *c.R1.BC = 0x0F3B
-  *c.R1.DE = 0x200D
-  *c.R1.HL = 0xDCA6
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x81
-  mem[0xDCA6] = 0x49
-  for c.TStates < 4 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x3031) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x3031, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0x0F3B) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0F3B, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x200D) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x200D, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0xDCA6) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0xDCA6, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 4) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
-  }
-}
-
-func Test82(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0xF500
-  *c.R1.BC = 0x0F3B
-  *c.R1.DE = 0x200D
-  *c.R1.HL = 0xDCA6
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x82
-  mem[0xDCA6] = 0x49
-  for c.TStates < 4 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x1501) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x1501, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0x0F3B) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0F3B, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x200D) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x200D, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0xDCA6) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0xDCA6, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 4) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
-  }
-}
-
-func Test83(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0xF500
-  *c.R1.BC = 0x0F3B
-  *c.R1.DE = 0x200D
-  *c.R1.HL = 0xDCA6
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x83
-  mem[0xDCA6] = 0x49
-  for c.TStates < 4 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0211) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0211, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0x0F3B) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0F3B, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x200D) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x200D, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0xDCA6) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0xDCA6, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 4) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
-  }
-}
-
-func Test84(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0xF500
-  *c.R1.BC = 0x0F3B
-  *c.R1.DE = 0x200D
-  *c.R1.HL = 0xDCA6
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x84
-  mem[0xDCA6] = 0x49
-  for c.TStates < 4 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0xD191) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0xD191, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0x0F3B) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0F3B, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x200D) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x200D, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0xDCA6) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0xDCA6, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 4) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
-  }
-}
-
-func Test85(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0xF500
-  *c.R1.BC = 0x0F3B
-  *c.R1.DE = 0x200D
-  *c.R1.HL = 0xDCA6
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x85
-  mem[0xDCA6] = 0x49
-  for c.TStates < 4 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x9B89) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x9B89, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0x0F3B) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0F3B, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x200D) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x200D, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0xDCA6) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0xDCA6, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 4) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
-  }
-}
-
-func Test86(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0xF500
-  *c.R1.BC = 0x0F3B
-  *c.R1.DE = 0x200D
-  *c.R1.HL = 0xDCA6
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x86
-  mem[0xDCA6] = 0x49
-  for c.TStates < 7 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x3E29) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x3E29, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0x0F3B) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0F3B, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x200D) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x200D, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0xDCA6) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0xDCA6, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 7) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 7, c.TStates)
-  }
-}
-
-func Test87(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0xF500
-  *c.R1.BC = 0x0F3B
-  *c.R1.DE = 0x200D
-  *c.R1.HL = 0xDCA6
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x87
-  mem[0xDCA6] = 0x49
-  for c.TStates < 4 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0xEAA9) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0xEAA9, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0x0F3B) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0F3B, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x200D) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x200D, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0xDCA6) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0xDCA6, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 4) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
-  }
-}
-
-func Test88(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0xF500
-  *c.R1.BC = 0x0F3B
-  *c.R1.DE = 0x200D
-  *c.R1.HL = 0xDCA6
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x88
-  mem[0xDCA6] = 0x49
-  for c.TStates < 4 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0411) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0411, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0x0F3B) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0F3B, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x200D) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x200D, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0xDCA6) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0xDCA6, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 4) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
-  }
-}
-
-func Test89(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0xF500
-  *c.R1.BC = 0x0F3B
-  *c.R1.DE = 0x200D
-  *c.R1.HL = 0xDCA6
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x89
-  mem[0xDCA6] = 0x49
-  for c.TStates < 4 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x3031) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x3031, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0x0F3B) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0F3B, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x200D) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x200D, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0xDCA6) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0xDCA6, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 4) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
-  }
-}
-
-func Test90(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0xF500
-  *c.R1.BC = 0x0F3B
-  *c.R1.DE = 0x200D
-  *c.R1.HL = 0xDCA6
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x90
-  mem[0xDCA6] = 0x49
-  for c.TStates < 4 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0xE6B2) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0xE6B2, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0x0F3B) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0F3B, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x200D) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x200D, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0xDCA6) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0xDCA6, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 4) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
-  }
-}
-
-func Test91(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0xF500
-  *c.R1.BC = 0x0F3B
-  *c.R1.DE = 0x200D
-  *c.R1.HL = 0xDCA6
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x91
-  mem[0xDCA6] = 0x49
-  for c.TStates < 4 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0xBABA) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0xBABA, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0x0F3B) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0F3B, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x200D) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x200D, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0xDCA6) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0xDCA6, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 4) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
-  }
-}
-
-func Test92(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0xF500
-  *c.R1.BC = 0x0F3B
-  *c.R1.DE = 0x200D
-  *c.R1.HL = 0xDCA6
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x92
-  mem[0xDCA6] = 0x49
-  for c.TStates < 4 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0xD582) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0xD582, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0x0F3B) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0F3B, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x200D) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x200D, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0xDCA6) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0xDCA6, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 4) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
-  }
-}
-
-func Test93(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0xF500
-  *c.R1.BC = 0x0F3B
-  *c.R1.DE = 0x200D
-  *c.R1.HL = 0xDCA6
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x93
-  mem[0xDCA6] = 0x49
-  for c.TStates < 4 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0xE8BA) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0xE8BA, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0x0F3B) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0F3B, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x200D) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x200D, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0xDCA6) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0xDCA6, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 4) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
-  }
-}
-
-func Test94(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0xF500
-  *c.R1.BC = 0x0F3B
-  *c.R1.DE = 0x200D
-  *c.R1.HL = 0xDCA6
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x94
-  mem[0xDCA6] = 0x49
-  for c.TStates < 4 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x191A) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x191A, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0x0F3B) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0F3B, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x200D) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x200D, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0xDCA6) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0xDCA6, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 4) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
-  }
-}
-
-func Test95(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0xF500
-  *c.R1.BC = 0x0F3B
-  *c.R1.DE = 0x200D
-  *c.R1.HL = 0xDCA6
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x95
-  mem[0xDCA6] = 0x49
-  for c.TStates < 4 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x4F1A) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x4F1A, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0x0F3B) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0F3B, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x200D) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x200D, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0xDCA6) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0xDCA6, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 4) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
-  }
-}
-
-func Test96(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0xF500
-  *c.R1.BC = 0x0F3B
-  *c.R1.DE = 0x200D
-  *c.R1.HL = 0xDCA6
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x96
-  mem[0xDCA6] = 0x49
-  for c.TStates < 7 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0xACBA) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0xACBA, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0x0F3B) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0F3B, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x200D) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x200D, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0xDCA6) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0xDCA6, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 7) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 7, c.TStates)
-  }
-}
-
-func Test97(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0xF500
-  *c.R1.BC = 0x0F3B
-  *c.R1.DE = 0x200D
-  *c.R1.HL = 0xDCA6
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x97
-  mem[0xDCA6] = 0x49
-  for c.TStates < 4 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0x0042) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0042, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0x0F3B) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0F3B, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x200D) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x200D, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0xDCA6) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0xDCA6, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 4) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
-  }
-}
-
-func Test98(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0xF500
-  *c.R1.BC = 0x0F3B
-  *c.R1.DE = 0x200D
-  *c.R1.HL = 0xDCA6
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x98
-  mem[0xDCA6] = 0x49
-  for c.TStates < 4 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0xE6B2) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0xE6B2, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0x0F3B) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0F3B, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x200D) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x200D, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0xDCA6) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0xDCA6, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 4) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
-  }
-}
-
-func Test99(t *testing.T) {
-  c.Reset()
-  *c.R1.AF = 0xF500
-  *c.R1.BC = 0x0F3B
-  *c.R1.DE = 0x200D
-  *c.R1.HL = 0xDCA6
-  *c.R2.AF = 0x0000
-  *c.R2.BC = 0x0000
-  *c.R2.DE = 0x0000
-  *c.R2.HL = 0x0000
-  *c.R1.IX = 0x0000
-  *c.R1.IY = 0x0000
-  *c.R1.SP = 0x0000
-  c.PC = 0x0000
-  c.I = 0x00
-  c.R = 0x00
-  mem[0x0000] = 0x99
-  mem[0xDCA6] = 0x49
-  for c.TStates < 4 {
-      c.Execute();
-  }
-  if (*c.R1.AF != 0xBABA) {
-    t.Errorf("AF mismatch: %04X expected, got %04X", 0xBABA, *c.R1.AF)
-  }
-  if (*c.R1.BC != 0x0F3B) {
-    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0F3B, *c.R1.BC)
-  }
-  if (*c.R1.DE != 0x200D) {
-    t.Errorf("DE mismatch: %04X expected, got %04X", 0x200D, *c.R1.DE)
-  }
-  if (*c.R1.HL != 0xDCA6) {
-    t.Errorf("HL mismatch: %04X expected, got %04X", 0xDCA6, *c.R1.HL)
-  }
-  if (*c.R2.AF != 0x0000) {
-    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
-  }
-  if (*c.R2.BC != 0x0000) {
-    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
-  }
-  if (*c.R2.DE != 0x0000) {
-    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
-  }
-  if (*c.R2.HL != 0x0000) {
-    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
-  }
-  if (*c.R1.IX != 0x0000) {
-    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
-  }
-  if (*c.R1.IY != 0x0000) {
-    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
-  }
-  if (*c.R1.SP != 0x0000) {
-    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
-  }
-  if (c.R != 0x01) {
-    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
-  }
-  if (c.I != 0x00) {
-    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
-  }
-  if (c.TStates != 4) {
-    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
-  }
-}
-
 func Test00(t *testing.T) {
   c.Reset()
   *c.R1.AF = 0x0000
@@ -6630,6 +1047,653 @@ func Test0F(t *testing.T) {
   }
 }
 
+func Test10(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0000
+  *c.R1.BC = 0x0800
+  *c.R1.DE = 0x0000
+  *c.R1.HL = 0x0000
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x00
+  mem[0x0001] = 0x10
+  mem[0x0002] = 0xFD
+  mem[0x0003] = 0x0C
+  for c.TStates < 135 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0000) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0000, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0x0001) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0001, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x0000) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x0000, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0x0000) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0x0000, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x11) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x11, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 135) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 135, c.TStates)
+  }
+}
+
+func Test11(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0000
+  *c.R1.BC = 0x0000
+  *c.R1.DE = 0x0000
+  *c.R1.HL = 0x0000
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x11
+  mem[0x0001] = 0x9A
+  mem[0x0002] = 0xBC
+  for c.TStates < 10 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0000) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0000, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0x0000) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0000, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0xBC9A) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0xBC9A, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0x0000) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0x0000, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 10) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 10, c.TStates)
+  }
+}
+
+func Test12(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x5600
+  *c.R1.BC = 0x0000
+  *c.R1.DE = 0x8000
+  *c.R1.HL = 0x0000
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x12
+  for c.TStates < 7 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x5600) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x5600, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0x0000) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0000, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x8000) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x8000, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0x0000) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0x0000, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 7) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 7, c.TStates)
+  }
+}
+
+func Test13(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0000
+  *c.R1.BC = 0x0000
+  *c.R1.DE = 0xDEF0
+  *c.R1.HL = 0x0000
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x13
+  for c.TStates < 6 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0000) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0000, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0x0000) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0000, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0xDEF1) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0xDEF1, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0x0000) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0x0000, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 6) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 6, c.TStates)
+  }
+}
+
+func Test14(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0000
+  *c.R1.BC = 0x0000
+  *c.R1.DE = 0x2700
+  *c.R1.HL = 0x0000
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x14
+  for c.TStates < 4 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0028) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0028, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0x0000) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0000, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x2800) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x2800, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0x0000) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0x0000, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 4) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
+  }
+}
+
+func Test15(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0000
+  *c.R1.BC = 0x0000
+  *c.R1.DE = 0x1000
+  *c.R1.HL = 0x0000
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x15
+  for c.TStates < 4 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x001A) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x001A, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0x0000) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0000, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x0F00) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x0F00, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0x0000) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0x0000, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 4) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
+  }
+}
+
+func Test16(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0000
+  *c.R1.BC = 0x0000
+  *c.R1.DE = 0x0000
+  *c.R1.HL = 0x0000
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x16
+  mem[0x0001] = 0x12
+  for c.TStates < 7 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0000) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0000, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0x0000) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0000, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x1200) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x1200, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0x0000) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0x0000, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 7) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 7, c.TStates)
+  }
+}
+
+func Test17(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0801
+  *c.R1.BC = 0x0000
+  *c.R1.DE = 0x0000
+  *c.R1.HL = 0x0000
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x17
+  for c.TStates < 4 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x1100) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x1100, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0x0000) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0000, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x0000) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x0000, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0x0000) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0x0000, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 4) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
+  }
+}
+
+func Test18(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0000
+  *c.R1.BC = 0x0000
+  *c.R1.DE = 0x0000
+  *c.R1.HL = 0x0000
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x18
+  mem[0x0001] = 0x40
+  for c.TStates < 12 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0000) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0000, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0x0000) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0000, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x0000) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x0000, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0x0000) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0x0000, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 12) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 12, c.TStates)
+  }
+}
+
+func Test19(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0000
+  *c.R1.BC = 0x0000
+  *c.R1.DE = 0x3456
+  *c.R1.HL = 0x789A
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x19
+  for c.TStates < 11 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0028) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0028, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0x0000) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0000, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x3456) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x3456, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0xACF0) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0xACF0, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 11) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 11, c.TStates)
+  }
+}
+
 func Test1A(t *testing.T) {
   c.Reset()
   *c.R1.AF = 0x0000
@@ -7146,6 +2210,395 @@ func Test20_2(t *testing.T) {
   }
 }
 
+func Test21(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0000
+  *c.R1.BC = 0x0000
+  *c.R1.DE = 0x0000
+  *c.R1.HL = 0x0000
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x21
+  mem[0x0001] = 0x28
+  mem[0x0002] = 0xED
+  for c.TStates < 10 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0000) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0000, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0x0000) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0000, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x0000) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x0000, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0xED28) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0xED28, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 10) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 10, c.TStates)
+  }
+}
+
+func Test22(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0000
+  *c.R1.BC = 0x0000
+  *c.R1.DE = 0x0000
+  *c.R1.HL = 0xC64C
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x22
+  mem[0x0001] = 0xB0
+  mem[0x0002] = 0xC3
+  for c.TStates < 16 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0000) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0000, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0x0000) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0000, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x0000) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x0000, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0xC64C) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0xC64C, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 16) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 16, c.TStates)
+  }
+}
+
+func Test23(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0000
+  *c.R1.BC = 0x0000
+  *c.R1.DE = 0x0000
+  *c.R1.HL = 0x9C4E
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x23
+  for c.TStates < 6 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0000) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0000, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0x0000) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0000, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x0000) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x0000, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0x9C4F) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0x9C4F, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 6) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 6, c.TStates)
+  }
+}
+
+func Test24(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0000
+  *c.R1.BC = 0x0000
+  *c.R1.DE = 0x0000
+  *c.R1.HL = 0x7200
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x24
+  for c.TStates < 4 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0020) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0020, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0x0000) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0000, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x0000) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x0000, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0x7300) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0x7300, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 4) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
+  }
+}
+
+func Test25(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0000
+  *c.R1.BC = 0x0000
+  *c.R1.DE = 0x0000
+  *c.R1.HL = 0xA500
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x25
+  for c.TStates < 4 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x00A2) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x00A2, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0x0000) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0000, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x0000) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x0000, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0xA400) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA400, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 4) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
+  }
+}
+
+func Test26(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0000
+  *c.R1.BC = 0x0000
+  *c.R1.DE = 0x0000
+  *c.R1.HL = 0x0000
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x26
+  mem[0x0001] = 0x3A
+  for c.TStates < 7 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0000) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0000, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0x0000) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0000, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x0000) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x0000, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0x3A00) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0x3A00, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 7) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 7, c.TStates)
+  }
+}
+
 func Test27_1(t *testing.T) {
   c.Reset()
   *c.R1.AF = 0x9A02
@@ -7168,6 +2621,70 @@ func Test27_1(t *testing.T) {
   }
   if (*c.R1.AF != 0x3423) {
     t.Errorf("AF mismatch: %04X expected, got %04X", 0x3423, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0x0000) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0000, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x0000) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x0000, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0x0000) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0x0000, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 4) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
+  }
+}
+
+func Test27(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x1F00
+  *c.R1.BC = 0x0000
+  *c.R1.DE = 0x0000
+  *c.R1.HL = 0x0000
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x27
+  for c.TStates < 4 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x2530) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x2530, *c.R1.AF)
   }
   if (*c.R1.BC != 0x0000) {
     t.Errorf("BC mismatch: %04X expected, got %04X", 0x0000, *c.R1.BC)
@@ -7337,6 +2854,70 @@ func Test28_2(t *testing.T) {
   }
   if (c.TStates != 12) {
     t.Errorf("TStates mismatch: %d expected, got %d", 12, c.TStates)
+  }
+}
+
+func Test29(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0000
+  *c.R1.BC = 0x0000
+  *c.R1.DE = 0x0000
+  *c.R1.HL = 0xCDFA
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x29
+  for c.TStates < 11 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0019) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0019, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0x0000) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0000, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x0000) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x0000, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0x9BF4) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0x9BF4, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 11) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 11, c.TStates)
   }
 }
 
@@ -7859,6 +3440,397 @@ func Test30_2(t *testing.T) {
   }
 }
 
+func Test31(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0000
+  *c.R1.BC = 0x0000
+  *c.R1.DE = 0x0000
+  *c.R1.HL = 0x0000
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x31
+  mem[0x0001] = 0xD4
+  mem[0x0002] = 0x61
+  for c.TStates < 10 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0000) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0000, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0x0000) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0000, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x0000) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x0000, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0x0000) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0x0000, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x61D4) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x61D4, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 10) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 10, c.TStates)
+  }
+}
+
+func Test32(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0E00
+  *c.R1.BC = 0x0000
+  *c.R1.DE = 0x0000
+  *c.R1.HL = 0x0000
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x32
+  mem[0x0001] = 0xAC
+  mem[0x0002] = 0xAD
+  for c.TStates < 13 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0E00) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0E00, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0x0000) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0000, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x0000) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x0000, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0x0000) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0x0000, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 13) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 13, c.TStates)
+  }
+}
+
+func Test33(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0000
+  *c.R1.BC = 0x0000
+  *c.R1.DE = 0x0000
+  *c.R1.HL = 0x0000
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0xA55A
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x33
+  for c.TStates < 6 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0000) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0000, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0x0000) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0000, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x0000) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x0000, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0x0000) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0x0000, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0xA55B) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0xA55B, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 6) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 6, c.TStates)
+  }
+}
+
+func Test34(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0000
+  *c.R1.BC = 0x0000
+  *c.R1.DE = 0x0000
+  *c.R1.HL = 0xFE1D
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x34
+  mem[0xFE1D] = 0xFD
+  for c.TStates < 11 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x00A8) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x00A8, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0x0000) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0000, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x0000) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x0000, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0xFE1D) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0xFE1D, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 11) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 11, c.TStates)
+  }
+}
+
+func Test35(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0000
+  *c.R1.BC = 0x0000
+  *c.R1.DE = 0x0000
+  *c.R1.HL = 0x470C
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x35
+  mem[0x470C] = 0x82
+  for c.TStates < 11 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0082) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0082, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0x0000) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0000, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x0000) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x0000, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0x470C) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0x470C, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 11) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 11, c.TStates)
+  }
+}
+
+func Test36(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0000
+  *c.R1.BC = 0x0000
+  *c.R1.DE = 0x0000
+  *c.R1.HL = 0x7D29
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x36
+  mem[0x0001] = 0x7C
+  for c.TStates < 10 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0000) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0000, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0x0000) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0000, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x0000) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x0000, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0x7D29) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0x7D29, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 10) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 10, c.TStates)
+  }
+}
+
 func Test37_1(t *testing.T) {
   c.Reset()
   *c.R1.AF = 0x00FF
@@ -8051,6 +4023,70 @@ func Test37_3(t *testing.T) {
   }
 }
 
+func Test37(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0000
+  *c.R1.BC = 0x0000
+  *c.R1.DE = 0x0000
+  *c.R1.HL = 0x0000
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x37
+  for c.TStates < 4 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0001) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0001, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0x0000) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0000, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x0000) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x0000, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0x0000) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0x0000, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 4) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
+  }
+}
+
 func Test38_1(t *testing.T) {
   c.Reset()
   *c.R1.AF = 0x00B2
@@ -8178,6 +4214,70 @@ func Test38_2(t *testing.T) {
   }
   if (c.TStates != 12) {
     t.Errorf("TStates mismatch: %d expected, got %d", 12, c.TStates)
+  }
+}
+
+func Test39(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0000
+  *c.R1.BC = 0x0000
+  *c.R1.DE = 0x0000
+  *c.R1.HL = 0x1AEF
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0xC534
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x29
+  for c.TStates < 11 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0030) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0030, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0x0000) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0000, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x0000) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x0000, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0x35DE) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0x35DE, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0xC534) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0xC534, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 11) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 11, c.TStates)
   }
 }
 
@@ -8569,6 +4669,656 @@ func Test3F(t *testing.T) {
   }
 }
 
+func Test40(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0200
+  *c.R1.BC = 0xCF98
+  *c.R1.DE = 0x90D8
+  *c.R1.HL = 0xA169
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x40
+  mem[0xA169] = 0x50
+  for c.TStates < 4 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0200) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0xCF98) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x90D8) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0xA169) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 4) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
+  }
+}
+
+func Test41(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0200
+  *c.R1.BC = 0xCF98
+  *c.R1.DE = 0x90D8
+  *c.R1.HL = 0xA169
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x41
+  mem[0xA169] = 0x50
+  for c.TStates < 4 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0200) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0x9898) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0x9898, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x90D8) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0xA169) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 4) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
+  }
+}
+
+func Test42(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0200
+  *c.R1.BC = 0xCF98
+  *c.R1.DE = 0x90D8
+  *c.R1.HL = 0xA169
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x42
+  mem[0xA169] = 0x50
+  for c.TStates < 4 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0200) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0x9098) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0x9098, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x90D8) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0xA169) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 4) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
+  }
+}
+
+func Test43(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0200
+  *c.R1.BC = 0xCF98
+  *c.R1.DE = 0x90D8
+  *c.R1.HL = 0xA169
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x43
+  mem[0xA169] = 0x50
+  for c.TStates < 4 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0200) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0xD898) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0xD898, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x90D8) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0xA169) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 4) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
+  }
+}
+
+func Test44(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0200
+  *c.R1.BC = 0xCF98
+  *c.R1.DE = 0x90D8
+  *c.R1.HL = 0xA169
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x44
+  mem[0xA169] = 0x50
+  for c.TStates < 4 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0200) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0xA198) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0xA198, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x90D8) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0xA169) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 4) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
+  }
+}
+
+func Test45(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0200
+  *c.R1.BC = 0xCF98
+  *c.R1.DE = 0x90D8
+  *c.R1.HL = 0xA169
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x45
+  mem[0xA169] = 0x50
+  for c.TStates < 4 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0200) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0x6998) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0x6998, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x90D8) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0xA169) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 4) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
+  }
+}
+
+func Test46(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0200
+  *c.R1.BC = 0xCF98
+  *c.R1.DE = 0x90D8
+  *c.R1.HL = 0xA169
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x46
+  mem[0xA169] = 0x50
+  for c.TStates < 7 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0200) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0x5098) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0x5098, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x90D8) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0xA169) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 7) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 7, c.TStates)
+  }
+}
+
+func Test47(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0200
+  *c.R1.BC = 0xCF98
+  *c.R1.DE = 0x90D8
+  *c.R1.HL = 0xA169
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x47
+  mem[0xA169] = 0x50
+  for c.TStates < 4 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0200) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0x0298) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0298, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x90D8) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0xA169) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 4) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
+  }
+}
+
+func Test48(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0200
+  *c.R1.BC = 0xCF98
+  *c.R1.DE = 0x90D8
+  *c.R1.HL = 0xA169
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x48
+  mem[0xA169] = 0x50
+  for c.TStates < 4 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0200) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0xCFCF) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCFCF, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x90D8) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0xA169) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 4) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
+  }
+}
+
+func Test49(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0200
+  *c.R1.BC = 0xCF98
+  *c.R1.DE = 0x90D8
+  *c.R1.HL = 0xA169
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x49
+  mem[0xA169] = 0x50
+  for c.TStates < 4 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0200) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0xCF98) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x90D8) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0xA169) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 4) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
+  }
+}
+
 func Test4A(t *testing.T) {
   c.Reset()
   *c.R1.AF = 0x0200
@@ -8923,6 +5673,656 @@ func Test4F(t *testing.T) {
   }
   if (*c.R1.DE != 0x90D8) {
     t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0xA169) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 4) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
+  }
+}
+
+func Test50(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0200
+  *c.R1.BC = 0xCF98
+  *c.R1.DE = 0x90D8
+  *c.R1.HL = 0xA169
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x50
+  mem[0xA169] = 0x50
+  for c.TStates < 4 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0200) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0xCF98) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0xCFD8) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0xCFD8, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0xA169) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 4) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
+  }
+}
+
+func Test51(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0200
+  *c.R1.BC = 0xCF98
+  *c.R1.DE = 0x90D8
+  *c.R1.HL = 0xA169
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x51
+  mem[0xA169] = 0x50
+  for c.TStates < 4 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0200) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0xCF98) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x98D8) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x98D8, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0xA169) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 4) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
+  }
+}
+
+func Test52(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0200
+  *c.R1.BC = 0xCF98
+  *c.R1.DE = 0x90D8
+  *c.R1.HL = 0xA169
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x52
+  mem[0xA169] = 0x50
+  for c.TStates < 4 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0200) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0xCF98) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x90D8) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0xA169) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 4) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
+  }
+}
+
+func Test53(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0200
+  *c.R1.BC = 0xCF98
+  *c.R1.DE = 0x90D8
+  *c.R1.HL = 0xA169
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x53
+  mem[0xA169] = 0x50
+  for c.TStates < 4 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0200) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0xCF98) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0xD8D8) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0xD8D8, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0xA169) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 4) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
+  }
+}
+
+func Test54(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0200
+  *c.R1.BC = 0xCF98
+  *c.R1.DE = 0x90D8
+  *c.R1.HL = 0xA169
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x54
+  mem[0xA169] = 0x50
+  for c.TStates < 4 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0200) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0xCF98) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0xA1D8) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0xA1D8, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0xA169) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 4) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
+  }
+}
+
+func Test55(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0200
+  *c.R1.BC = 0xCF98
+  *c.R1.DE = 0x90D8
+  *c.R1.HL = 0xA169
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x55
+  mem[0xA169] = 0x50
+  for c.TStates < 4 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0200) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0xCF98) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x69D8) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x69D8, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0xA169) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 4) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
+  }
+}
+
+func Test56(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0200
+  *c.R1.BC = 0xCF98
+  *c.R1.DE = 0x90D8
+  *c.R1.HL = 0xA169
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x56
+  mem[0xA169] = 0x50
+  for c.TStates < 7 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0200) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0xCF98) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x50D8) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x50D8, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0xA169) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 7) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 7, c.TStates)
+  }
+}
+
+func Test57(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0200
+  *c.R1.BC = 0xCF98
+  *c.R1.DE = 0x90D8
+  *c.R1.HL = 0xA169
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x57
+  mem[0xA169] = 0x50
+  for c.TStates < 4 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0200) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0xCF98) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x02D8) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x02D8, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0xA169) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 4) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
+  }
+}
+
+func Test58(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0200
+  *c.R1.BC = 0xCF98
+  *c.R1.DE = 0x90D8
+  *c.R1.HL = 0xA169
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x58
+  mem[0xA169] = 0x50
+  for c.TStates < 4 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0200) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0xCF98) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x90CF) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90CF, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0xA169) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 4) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
+  }
+}
+
+func Test59(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0200
+  *c.R1.BC = 0xCF98
+  *c.R1.DE = 0x90D8
+  *c.R1.HL = 0xA169
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x59
+  mem[0xA169] = 0x50
+  for c.TStates < 4 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0200) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0xCF98) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x9098) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x9098, *c.R1.DE)
   }
   if (*c.R1.HL != 0xA169) {
     t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
@@ -9349,6 +6749,656 @@ func Test5F(t *testing.T) {
   }
 }
 
+func Test60(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0200
+  *c.R1.BC = 0xCF98
+  *c.R1.DE = 0x90D8
+  *c.R1.HL = 0xA169
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x60
+  mem[0xA169] = 0x50
+  for c.TStates < 4 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0200) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0xCF98) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x90D8) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0xCF69) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0xCF69, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 4) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
+  }
+}
+
+func Test61(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0200
+  *c.R1.BC = 0xCF98
+  *c.R1.DE = 0x90D8
+  *c.R1.HL = 0xA169
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x61
+  mem[0xA169] = 0x50
+  for c.TStates < 4 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0200) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0xCF98) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x90D8) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0x9869) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0x9869, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 4) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
+  }
+}
+
+func Test62(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0200
+  *c.R1.BC = 0xCF98
+  *c.R1.DE = 0x90D8
+  *c.R1.HL = 0xA169
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x62
+  mem[0xA169] = 0x50
+  for c.TStates < 4 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0200) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0xCF98) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x90D8) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0x9069) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0x9069, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 4) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
+  }
+}
+
+func Test63(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0200
+  *c.R1.BC = 0xCF98
+  *c.R1.DE = 0x90D8
+  *c.R1.HL = 0xA169
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x63
+  mem[0xA169] = 0x50
+  for c.TStates < 4 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0200) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0xCF98) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x90D8) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0xD869) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0xD869, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 4) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
+  }
+}
+
+func Test64(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0200
+  *c.R1.BC = 0xCF98
+  *c.R1.DE = 0x90D8
+  *c.R1.HL = 0xA169
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x64
+  mem[0xA169] = 0x50
+  for c.TStates < 4 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0200) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0xCF98) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x90D8) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0xA169) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 4) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
+  }
+}
+
+func Test65(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0200
+  *c.R1.BC = 0xCF98
+  *c.R1.DE = 0x90D8
+  *c.R1.HL = 0xA169
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x65
+  mem[0xA169] = 0x50
+  for c.TStates < 4 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0200) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0xCF98) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x90D8) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0x6969) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0x6969, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 4) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
+  }
+}
+
+func Test66(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0200
+  *c.R1.BC = 0xCF98
+  *c.R1.DE = 0x90D8
+  *c.R1.HL = 0xA169
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x66
+  mem[0xA169] = 0x50
+  for c.TStates < 7 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0200) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0xCF98) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x90D8) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0x5069) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0x5069, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 7) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 7, c.TStates)
+  }
+}
+
+func Test67(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0200
+  *c.R1.BC = 0xCF98
+  *c.R1.DE = 0x90D8
+  *c.R1.HL = 0xA169
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x67
+  mem[0xA169] = 0x50
+  for c.TStates < 4 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0200) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0xCF98) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x90D8) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0x0269) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0x0269, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 4) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
+  }
+}
+
+func Test68(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0200
+  *c.R1.BC = 0xCF98
+  *c.R1.DE = 0x90D8
+  *c.R1.HL = 0xA169
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x68
+  mem[0xA169] = 0x50
+  for c.TStates < 4 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0200) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0xCF98) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x90D8) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0xA1CF) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA1CF, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 4) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
+  }
+}
+
+func Test69(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0200
+  *c.R1.BC = 0xCF98
+  *c.R1.DE = 0x90D8
+  *c.R1.HL = 0xA169
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x69
+  mem[0xA169] = 0x50
+  for c.TStates < 4 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0200) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0xCF98) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x90D8) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0xA198) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA198, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 4) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
+  }
+}
+
 func Test6A(t *testing.T) {
   c.Reset()
   *c.R1.AF = 0x0200
@@ -9706,6 +7756,656 @@ func Test6F(t *testing.T) {
   }
   if (*c.R1.HL != 0xA102) {
     t.Errorf("HL mismatch: %04X expected, got %04X", 0xA102, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 4) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
+  }
+}
+
+func Test70(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0200
+  *c.R1.BC = 0xCF98
+  *c.R1.DE = 0x90D8
+  *c.R1.HL = 0xA169
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x70
+  mem[0xA169] = 0x50
+  for c.TStates < 7 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0200) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0xCF98) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x90D8) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0xA169) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 7) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 7, c.TStates)
+  }
+}
+
+func Test71(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0200
+  *c.R1.BC = 0xCF98
+  *c.R1.DE = 0x90D8
+  *c.R1.HL = 0xA169
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x71
+  mem[0xA169] = 0x50
+  for c.TStates < 7 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0200) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0xCF98) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x90D8) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0xA169) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 7) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 7, c.TStates)
+  }
+}
+
+func Test72(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0200
+  *c.R1.BC = 0xCF98
+  *c.R1.DE = 0x90D8
+  *c.R1.HL = 0xA169
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x72
+  mem[0xA169] = 0x50
+  for c.TStates < 7 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0200) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0xCF98) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x90D8) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0xA169) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 7) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 7, c.TStates)
+  }
+}
+
+func Test73(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0200
+  *c.R1.BC = 0xCF98
+  *c.R1.DE = 0x90D8
+  *c.R1.HL = 0xA169
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x73
+  mem[0xA169] = 0x50
+  for c.TStates < 7 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0200) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0xCF98) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x90D8) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0xA169) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 7) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 7, c.TStates)
+  }
+}
+
+func Test74(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0200
+  *c.R1.BC = 0xCF98
+  *c.R1.DE = 0x90D8
+  *c.R1.HL = 0xA169
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x74
+  mem[0xA169] = 0x50
+  for c.TStates < 7 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0200) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0xCF98) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x90D8) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0xA169) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 7) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 7, c.TStates)
+  }
+}
+
+func Test75(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0200
+  *c.R1.BC = 0xCF98
+  *c.R1.DE = 0x90D8
+  *c.R1.HL = 0xA169
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x75
+  mem[0xA169] = 0x50
+  for c.TStates < 7 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0200) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0xCF98) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x90D8) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0xA169) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 7) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 7, c.TStates)
+  }
+}
+
+func Test76(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0200
+  *c.R1.BC = 0xCF98
+  *c.R1.DE = 0x90D8
+  *c.R1.HL = 0xA169
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x76
+  mem[0xA169] = 0x50
+  for c.TStates < 4 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0200) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0xCF98) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x90D8) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0xA169) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 4) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
+  }
+}
+
+func Test77(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0200
+  *c.R1.BC = 0xCF98
+  *c.R1.DE = 0x90D8
+  *c.R1.HL = 0xA169
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x77
+  mem[0xA169] = 0x50
+  for c.TStates < 7 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0200) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0200, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0xCF98) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x90D8) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0xA169) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 7) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 7, c.TStates)
+  }
+}
+
+func Test78(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0200
+  *c.R1.BC = 0xCF98
+  *c.R1.DE = 0x90D8
+  *c.R1.HL = 0xA169
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x78
+  mem[0xA169] = 0x50
+  for c.TStates < 4 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0xCF00) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0xCF00, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0xCF98) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x90D8) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0xA169) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 4) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
+  }
+}
+
+func Test79(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0x0200
+  *c.R1.BC = 0xCF98
+  *c.R1.DE = 0x90D8
+  *c.R1.HL = 0xA169
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x79
+  mem[0xA169] = 0x50
+  for c.TStates < 4 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x9800) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x9800, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0xCF98) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0xCF98, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x90D8) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x90D8, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0xA169) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0xA169, *c.R1.HL)
   }
   if (*c.R2.AF != 0x0000) {
     t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
@@ -10129,6 +8829,656 @@ func Test7F(t *testing.T) {
   }
 }
 
+func Test80(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0xF500
+  *c.R1.BC = 0x0F3B
+  *c.R1.DE = 0x200D
+  *c.R1.HL = 0xDCA6
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x80
+  mem[0xDCA6] = 0x49
+  for c.TStates < 4 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0411) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0411, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0x0F3B) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0F3B, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x200D) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x200D, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0xDCA6) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0xDCA6, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 4) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
+  }
+}
+
+func Test81(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0xF500
+  *c.R1.BC = 0x0F3B
+  *c.R1.DE = 0x200D
+  *c.R1.HL = 0xDCA6
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x81
+  mem[0xDCA6] = 0x49
+  for c.TStates < 4 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x3031) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x3031, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0x0F3B) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0F3B, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x200D) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x200D, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0xDCA6) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0xDCA6, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 4) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
+  }
+}
+
+func Test82(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0xF500
+  *c.R1.BC = 0x0F3B
+  *c.R1.DE = 0x200D
+  *c.R1.HL = 0xDCA6
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x82
+  mem[0xDCA6] = 0x49
+  for c.TStates < 4 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x1501) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x1501, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0x0F3B) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0F3B, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x200D) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x200D, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0xDCA6) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0xDCA6, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 4) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
+  }
+}
+
+func Test83(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0xF500
+  *c.R1.BC = 0x0F3B
+  *c.R1.DE = 0x200D
+  *c.R1.HL = 0xDCA6
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x83
+  mem[0xDCA6] = 0x49
+  for c.TStates < 4 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0211) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0211, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0x0F3B) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0F3B, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x200D) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x200D, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0xDCA6) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0xDCA6, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 4) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
+  }
+}
+
+func Test84(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0xF500
+  *c.R1.BC = 0x0F3B
+  *c.R1.DE = 0x200D
+  *c.R1.HL = 0xDCA6
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x84
+  mem[0xDCA6] = 0x49
+  for c.TStates < 4 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0xD191) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0xD191, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0x0F3B) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0F3B, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x200D) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x200D, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0xDCA6) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0xDCA6, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 4) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
+  }
+}
+
+func Test85(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0xF500
+  *c.R1.BC = 0x0F3B
+  *c.R1.DE = 0x200D
+  *c.R1.HL = 0xDCA6
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x85
+  mem[0xDCA6] = 0x49
+  for c.TStates < 4 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x9B89) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x9B89, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0x0F3B) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0F3B, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x200D) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x200D, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0xDCA6) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0xDCA6, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 4) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
+  }
+}
+
+func Test86(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0xF500
+  *c.R1.BC = 0x0F3B
+  *c.R1.DE = 0x200D
+  *c.R1.HL = 0xDCA6
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x86
+  mem[0xDCA6] = 0x49
+  for c.TStates < 7 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x3E29) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x3E29, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0x0F3B) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0F3B, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x200D) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x200D, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0xDCA6) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0xDCA6, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 7) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 7, c.TStates)
+  }
+}
+
+func Test87(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0xF500
+  *c.R1.BC = 0x0F3B
+  *c.R1.DE = 0x200D
+  *c.R1.HL = 0xDCA6
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x87
+  mem[0xDCA6] = 0x49
+  for c.TStates < 4 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0xEAA9) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0xEAA9, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0x0F3B) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0F3B, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x200D) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x200D, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0xDCA6) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0xDCA6, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 4) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
+  }
+}
+
+func Test88(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0xF500
+  *c.R1.BC = 0x0F3B
+  *c.R1.DE = 0x200D
+  *c.R1.HL = 0xDCA6
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x88
+  mem[0xDCA6] = 0x49
+  for c.TStates < 4 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0411) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0411, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0x0F3B) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0F3B, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x200D) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x200D, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0xDCA6) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0xDCA6, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 4) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
+  }
+}
+
+func Test89(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0xF500
+  *c.R1.BC = 0x0F3B
+  *c.R1.DE = 0x200D
+  *c.R1.HL = 0xDCA6
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x89
+  mem[0xDCA6] = 0x49
+  for c.TStates < 4 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x3031) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x3031, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0x0F3B) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0F3B, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x200D) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x200D, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0xDCA6) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0xDCA6, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 4) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
+  }
+}
+
 func Test8A(t *testing.T) {
   c.Reset()
   *c.R1.AF = 0xF500
@@ -10477,6 +9827,656 @@ func Test8F(t *testing.T) {
   }
   if (*c.R1.AF != 0xEAA9) {
     t.Errorf("AF mismatch: %04X expected, got %04X", 0xEAA9, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0x0F3B) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0F3B, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x200D) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x200D, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0xDCA6) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0xDCA6, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 4) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
+  }
+}
+
+func Test90(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0xF500
+  *c.R1.BC = 0x0F3B
+  *c.R1.DE = 0x200D
+  *c.R1.HL = 0xDCA6
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x90
+  mem[0xDCA6] = 0x49
+  for c.TStates < 4 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0xE6B2) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0xE6B2, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0x0F3B) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0F3B, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x200D) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x200D, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0xDCA6) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0xDCA6, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 4) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
+  }
+}
+
+func Test91(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0xF500
+  *c.R1.BC = 0x0F3B
+  *c.R1.DE = 0x200D
+  *c.R1.HL = 0xDCA6
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x91
+  mem[0xDCA6] = 0x49
+  for c.TStates < 4 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0xBABA) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0xBABA, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0x0F3B) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0F3B, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x200D) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x200D, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0xDCA6) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0xDCA6, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 4) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
+  }
+}
+
+func Test92(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0xF500
+  *c.R1.BC = 0x0F3B
+  *c.R1.DE = 0x200D
+  *c.R1.HL = 0xDCA6
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x92
+  mem[0xDCA6] = 0x49
+  for c.TStates < 4 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0xD582) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0xD582, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0x0F3B) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0F3B, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x200D) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x200D, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0xDCA6) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0xDCA6, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 4) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
+  }
+}
+
+func Test93(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0xF500
+  *c.R1.BC = 0x0F3B
+  *c.R1.DE = 0x200D
+  *c.R1.HL = 0xDCA6
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x93
+  mem[0xDCA6] = 0x49
+  for c.TStates < 4 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0xE8BA) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0xE8BA, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0x0F3B) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0F3B, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x200D) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x200D, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0xDCA6) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0xDCA6, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 4) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
+  }
+}
+
+func Test94(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0xF500
+  *c.R1.BC = 0x0F3B
+  *c.R1.DE = 0x200D
+  *c.R1.HL = 0xDCA6
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x94
+  mem[0xDCA6] = 0x49
+  for c.TStates < 4 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x191A) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x191A, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0x0F3B) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0F3B, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x200D) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x200D, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0xDCA6) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0xDCA6, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 4) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
+  }
+}
+
+func Test95(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0xF500
+  *c.R1.BC = 0x0F3B
+  *c.R1.DE = 0x200D
+  *c.R1.HL = 0xDCA6
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x95
+  mem[0xDCA6] = 0x49
+  for c.TStates < 4 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x4F1A) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x4F1A, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0x0F3B) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0F3B, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x200D) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x200D, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0xDCA6) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0xDCA6, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 4) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
+  }
+}
+
+func Test96(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0xF500
+  *c.R1.BC = 0x0F3B
+  *c.R1.DE = 0x200D
+  *c.R1.HL = 0xDCA6
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x96
+  mem[0xDCA6] = 0x49
+  for c.TStates < 7 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0xACBA) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0xACBA, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0x0F3B) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0F3B, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x200D) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x200D, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0xDCA6) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0xDCA6, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 7) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 7, c.TStates)
+  }
+}
+
+func Test97(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0xF500
+  *c.R1.BC = 0x0F3B
+  *c.R1.DE = 0x200D
+  *c.R1.HL = 0xDCA6
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x97
+  mem[0xDCA6] = 0x49
+  for c.TStates < 4 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0x0042) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0x0042, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0x0F3B) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0F3B, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x200D) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x200D, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0xDCA6) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0xDCA6, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 4) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
+  }
+}
+
+func Test98(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0xF500
+  *c.R1.BC = 0x0F3B
+  *c.R1.DE = 0x200D
+  *c.R1.HL = 0xDCA6
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x98
+  mem[0xDCA6] = 0x49
+  for c.TStates < 4 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0xE6B2) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0xE6B2, *c.R1.AF)
+  }
+  if (*c.R1.BC != 0x0F3B) {
+    t.Errorf("BC mismatch: %04X expected, got %04X", 0x0F3B, *c.R1.BC)
+  }
+  if (*c.R1.DE != 0x200D) {
+    t.Errorf("DE mismatch: %04X expected, got %04X", 0x200D, *c.R1.DE)
+  }
+  if (*c.R1.HL != 0xDCA6) {
+    t.Errorf("HL mismatch: %04X expected, got %04X", 0xDCA6, *c.R1.HL)
+  }
+  if (*c.R2.AF != 0x0000) {
+    t.Errorf("AF' mismatch: %04X expected, got %04X", 0x0000, *c.R2.AF)
+  }
+  if (*c.R2.BC != 0x0000) {
+    t.Errorf("BC' mismatch: %04X expected, got %04X", 0x0000, *c.R2.BC)
+  }
+  if (*c.R2.DE != 0x0000) {
+    t.Errorf("DE' mismatch: %04X expected, got %04X", 0x0000, *c.R2.DE)
+  }
+  if (*c.R2.HL != 0x0000) {
+    t.Errorf("HL' mismatch: %04X expected, got %04X", 0x0000, *c.R2.HL)
+  }
+  if (*c.R1.IX != 0x0000) {
+    t.Errorf("IX mismatch: %04X expected, got %04X", 0x0000, *c.R1.IX)
+  }
+  if (*c.R1.IY != 0x0000) {
+    t.Errorf("IY mismatch: %04X expected, got %04X", 0x0000, *c.R1.IY)
+  }
+  if (*c.R1.SP != 0x0000) {
+    t.Errorf("SP mismatch: %04X expected, got %04X", 0x0000, *c.R1.SP)
+  }
+  if (c.R != 0x01) {
+    t.Errorf("R mismatch: %02X expected, got %02X", 0x01, c.R)
+  }
+  if (c.I != 0x00) {
+    t.Errorf("I mismatch: %02X expected, got %02X", 0x00, c.I)
+  }
+  if (c.TStates != 4) {
+    t.Errorf("TStates mismatch: %d expected, got %d", 4, c.TStates)
+  }
+}
+
+func Test99(t *testing.T) {
+  c.Reset()
+  *c.R1.AF = 0xF500
+  *c.R1.BC = 0x0F3B
+  *c.R1.DE = 0x200D
+  *c.R1.HL = 0xDCA6
+  *c.R2.AF = 0x0000
+  *c.R2.BC = 0x0000
+  *c.R2.DE = 0x0000
+  *c.R2.HL = 0x0000
+  *c.R1.IX = 0x0000
+  *c.R1.IY = 0x0000
+  *c.R1.SP = 0x0000
+  c.PC = 0x0000
+  c.I = 0x00
+  c.R = 0x00
+  mem[0x0000] = 0x99
+  mem[0xDCA6] = 0x49
+  for c.TStates < 4 {
+      c.Execute();
+  }
+  if (*c.R1.AF != 0xBABA) {
+    t.Errorf("AF mismatch: %04X expected, got %04X", 0xBABA, *c.R1.AF)
   }
   if (*c.R1.BC != 0x0F3B) {
     t.Errorf("BC mismatch: %04X expected, got %04X", 0x0F3B, *c.R1.BC)
