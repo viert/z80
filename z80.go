@@ -15,9 +15,8 @@ import (
 )
 
 const (
-
-    T_LENGTH = 285.7142857142857 * 2
-    T_STATES_TO_BREAK = 35000
+	T_LENGTH          = 285.7142857142857 * 2
+	T_STATES_TO_BREAK = 35000
 
 	// Flags for doIncDec()
 	ID_INC = false
@@ -104,8 +103,8 @@ type Context struct {
 	execIntVector bool
 
 	/* Debug assistance */
-//	LatestInstruction string
-//	LatestDump        RegisterDump
+	//	LatestInstruction string
+	//	LatestDump        RegisterDump
 
 	opcodes_main Z80OpcodeTable
 	opcodes_DD   Z80OpcodeTable
@@ -117,8 +116,8 @@ type Context struct {
 
 	debug  bool
 	stop   bool
-    state  string
-    bpmode bool
+	state  string
+	bpmode bool
 
 	breakpoints map[uint16]bool
 }
@@ -145,8 +144,8 @@ func NewContext(debug bool) *Context {
 	c := new(Context)
 	c.debug = debug
 	c.stop = false
-    c.state = "idle"
-    c.bpmode = false
+	c.state = "idle"
+	c.bpmode = false
 	c.breakpoints = make(map[uint16]bool)
 	c.createTables()
 	c.R1 = NewRegisterSet()
@@ -155,12 +154,12 @@ func NewContext(debug bool) *Context {
 }
 
 func (c *Context) State() string {
-    return c.state
+	return c.state
 }
 
 func (c *Context) GetRegisterDump() *RegisterDump {
-    dump := new(RegisterDump)
-    dump.PC = c.PC
+	dump := new(RegisterDump)
+	dump.PC = c.PC
 	dump.AF = *c.R1.AF
 	dump.BC = *c.R1.BC
 	dump.DE = *c.R1.DE
@@ -176,15 +175,15 @@ func (c *Context) GetRegisterDump() *RegisterDump {
 	dump.R = c.R
 	dump.IFF1 = c.IFF1
 	dump.IFF2 = c.IFF2
-    return dump
+	return dump
 }
 
 func (c *Context) SetBPMode(value bool) {
-    c.bpmode = value
+	c.bpmode = value
 }
 
 func (c *Context) GetBPMode() bool {
-    return c.bpmode
+	return c.bpmode
 }
 
 func (c *Context) AddBreakpoint(addr uint16) {
@@ -198,17 +197,17 @@ func (c *Context) RemoveBreakpoint(addr uint16) {
 }
 
 func (c *Context) GetBreakpoints() []uint16 {
-    bpList := make([]uint16, 0)
-    for key, _ := range c.breakpoints {
-        bpList = append(bpList, key)
-    }
-    return bpList
+	bpList := make([]uint16, 0)
+	for key, _ := range c.breakpoints {
+		bpList = append(bpList, key)
+	}
+	return bpList
 }
 
 func (c *Context) Disassemble(addr uint16) (string, uint16) {
 	var opcode byte
 	var offset uint16 = 0
-    var arglen uint16 = 0
+	var arglen uint16 = 0
 	var result string = "OP_INVALID"
 	currentTable := &c.opcodes_main
 	tableEntries := currentTable.entries
@@ -224,15 +223,15 @@ func (c *Context) Disassemble(addr uint16) (string, uint16) {
 			case OP_BYTE:
 				dByte := c.read8(addr)
 				result = fmt.Sprintf(entry.format, dByte)
-                arglen = 1
+				arglen = 1
 			case OP_OFFSET:
 				dInt := int8(c.read8(addr))
 				result = fmt.Sprintf(entry.format, dInt)
-                arglen = 1
+				arglen = 1
 			case OP_WORD:
 				dWord := c.read16(addr)
 				result = fmt.Sprintf(entry.format, dWord)
-                arglen = 2
+				arglen = 2
 			}
 			break
 		} else if tableEntries[opcode].nextTable != nil {
@@ -263,26 +262,9 @@ func (c *Context) doExecute() {
 		c.incr()
 		opfunc := tableEntries[opcode].function
 		if opfunc != nil {
-/*			if c.debug {
-				entry := tableEntries[opcode]
-				switch entry.operandType {
-				case OP_NONE:
-					c.LatestInstruction = fmt.Sprintf(entry.format)
-				case OP_BYTE:
-					bytedata := c.read8(c.PC)
-					c.LatestInstruction = fmt.Sprintf(entry.format, bytedata)
-				case OP_OFFSET:
-					intdata := int8(c.read8(c.PC))
-					c.LatestInstruction = fmt.Sprintf(entry.format, intdata)
-				case OP_WORD:
-					worddata := c.read16(c.PC)
-					c.LatestInstruction = fmt.Sprintf(entry.format, worddata)
-				}
-			} */
 			c.PC -= uint16(offset)
 			opfunc()
 			c.PC += uint16(offset)
-
 			break
 		} else if tableEntries[opcode].nextTable != nil {
 			currentTable = tableEntries[opcode].nextTable
@@ -303,12 +285,12 @@ func (c *Context) Stop() {
 
 func (c *Context) Resume() {
 	c.stop = false
-    c.state = "idle"
+	c.state = "idle"
 }
 
 func (c *Context) Execute() uint64 {
-    states := c.TStates
-    c.state = "running"
+	states := c.TStates
+	c.state = "running"
 	if c.nmiRequested {
 		c.doNmi()
 	} else if c.intRequested && !c.deferInt && c.IFF1 {
@@ -317,19 +299,19 @@ func (c *Context) Execute() uint64 {
 		c.deferInt = false
 		c.doExecute()
 	}
-    c.state = "stopped"
-    return c.TStates - states
+	c.state = "stopped"
+	return c.TStates - states
 }
 
 func (c *Context) ExecuteTStates(tstates uint64) uint64 {
 	c.TStates = 0
 	for c.TStates < tstates {
 		if c.stop {
-            c.state = "stopped"
+			c.state = "stopped"
 			break
 		}
 		if c.bpmode && c.breakpoints[c.PC] {
-            c.state = fmt.Sprintf("stopped at brkp %04X", c.PC)
+			c.state = fmt.Sprintf("stopped at brkp %04X", c.PC)
 			c.stop = true
 			break
 		}
@@ -361,8 +343,23 @@ func (c *Context) unhalt() {
 	}
 }
 
+func (c *Context) ioread(addr uint16) byte {
+	c.TStates += 4
+	return c.IoRead(addr)
+}
+
+func (c *Context) iowrite(addr uint16, value byte) {
+	c.TStates += 4
+	c.IoWrite(addr, value)
+}
+
 func (c *Context) read8(addr uint16) byte {
-	return c.MemoryRead(addr)
+	c.TStates += 3
+	data := c.MemoryRead(addr)
+	if c.debug {
+		fmt.Printf("Reading memory address 0x%04X = 0x%02X\n", addr, data)
+	}
+	return data
 }
 
 func (c *Context) read16(addr uint16) uint16 {
@@ -372,14 +369,18 @@ func (c *Context) read16(addr uint16) uint16 {
 }
 
 func (c *Context) write8(addr uint16, data byte) {
+	c.TStates += 3
+	if c.debug {
+		fmt.Printf("Writing 0x%02X to memory address 0x%04X", data, addr)
+	}
 	c.MemoryWrite(addr, data)
 }
 
 func (c *Context) write16(addr uint16, data uint16) {
 	low := byte(data & 0xFF)
 	high := byte((data >> 8) & 0xFF)
-	c.MemoryWrite(addr, low)
-	c.MemoryWrite(addr+1, high)
+	c.write8(addr, low)
+	c.write8(addr+1, high)
 }
 
 func (c *Context) doAddWord(a1 uint16, a2 uint16, withCarry bool, isSub bool) uint16 {

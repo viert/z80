@@ -64,7 +64,8 @@ BIT [0-7],(HL)
 
 BIT [0-7],([IX,IY]+d)
 	c.TStates += 2
-	address := uint16(int32(*c.R1.$2) + int32(c.read8(c.PC)))
+	displacement := int8(c.read8(c.PC))
+	address := uint16(int32(*c.R1.$2) + int32(displacement))
 	c.PC++
 	c.doBIT_indexed($1, address)
 
@@ -333,7 +334,7 @@ IM [012]
 # IO ports
 #
 IN [A,B,C,D,E,F,H,L],(C)
-	*c.R1.$1 = c.IoRead(*c.R1.BC)
+	*c.R1.$1 = c.ioread(*c.R1.BC)
 	c.resFlag(F_H|F_N)
 	c.adjustFlagSZP(*c.R1.$1)
 	c.adjustFlags(*c.R1.$1)
@@ -342,7 +343,7 @@ IN A,(n)
 	port := uint16(c.read8(c.PC))
 	c.PC++
 	port = uint16(*c.R1.A)<<8 | port 
-	*c.R1.A = c.IoRead(port)
+	*c.R1.A = c.ioread(port)
 
 INDR
 	c.ind()
@@ -353,7 +354,7 @@ INDR
 
 IND
 	c.TStates += 1
-	val := c.IoRead(*c.R1.BC)
+	val := c.ioread(*c.R1.BC)
 	c.write8(*c.R1.HL, val)
 	*c.R1.HL--
 	*c.R1.B = c.doIncDec(*c.R1.B, ID_DEC)
@@ -372,7 +373,7 @@ INIR
 
 INI
 	c.TStates += 1
-	val := c.IoRead(*c.R1.BC)
+	val := c.ioread(*c.R1.BC)
 	c.write8(*c.R1.HL, val)
 	*c.R1.HL++
 	*c.R1.B = c.doIncDec(*c.R1.B, ID_DEC)
@@ -387,7 +388,7 @@ OUTI
 	value := c.read8(*c.R1.HL)
 	*c.R1.B = c.doIncDec(*c.R1.B, ID_DEC)
 
-	c.IoWrite(*c.R1.BC, value)
+	c.iowrite(*c.R1.BC, value)
 	*c.R1.HL++
 
 	flag_value := int(value) + int(*c.R1.L)
@@ -409,7 +410,7 @@ OUTD
 	value := c.read8(*c.R1.HL)
 	*c.R1.B = c.doIncDec(*c.R1.B, ID_DEC)
 
-	c.IoWrite(*c.R1.BC, value)
+	c.iowrite(*c.R1.BC, value)
 	*c.R1.HL--
 
 	flag_value := int(value) + int(*c.R1.L)
@@ -427,16 +428,16 @@ OTDR
 	}
 
 OUT (C),0
-	c.IoWrite(*c.R1.BC, 0)
+	c.iowrite(*c.R1.BC, 0)
 	
 OUT (C),[A,B,C,D,E,H,L]
-	c.IoWrite(*c.R1.BC, *c.R1.$1)
+	c.iowrite(*c.R1.BC, *c.R1.$1)
 
 OUT (n),A
 	port := uint16(c.read8(c.PC))
 	c.PC++
 	port = uint16(*c.R1.A)<<8 | port
-	c.IoWrite(port, *c.R1.A)
+	c.iowrite(port, *c.R1.A)
 
 #
 # Stack
