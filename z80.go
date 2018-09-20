@@ -206,43 +206,52 @@ func (c *Context) GetBreakpoints() []uint16 {
 
 func (c *Context) Disassemble(addr uint16) (string, uint16) {
 	var opcode byte
-	var offset uint16 = 0
-	var arglen uint16 = 0
-	var result string = "OP_INVALID"
-	currentTable := &c.opcodes_main
-	tableEntries := currentTable.entries
+	var offset uint16
+	var result = "OP_INVALID"
+
+	current := &c.opcodes_main
+
 	for {
 		opcode = c.read8(addr + offset)
 		addr++
-		opfunc := tableEntries[opcode].function
-		if opfunc != nil {
-			entry := tableEntries[opcode]
+
+		entry := current.entries[opcode]
+
+		if entry.function != nil {
+			addr -= offset
 			switch entry.operandType {
 			case OP_NONE:
 				result = fmt.Sprintf(entry.format)
 			case OP_BYTE:
 				dByte := c.read8(addr)
+				addr++
 				result = fmt.Sprintf(entry.format, dByte)
-				arglen = 1
-			case OP_OFFSET:
-				dInt := int8(c.read8(addr))
-				result = fmt.Sprintf(entry.format, dInt)
-				arglen = 1
 			case OP_WORD:
 				dWord := c.read16(addr)
+				addr += 2
 				result = fmt.Sprintf(entry.format, dWord)
-				arglen = 2
+			case OP_OFFSET:
+				var strArg string
+				dInt := int8(c.read8(addr))
+				addr++
+				strArg = fmt.Sprintf("%d", dInt)
+				if dInt >= 0 {
+					strArg = "+" + strArg
+				}
+				result = fmt.Sprintf(entry.format, strArg)
 			}
-			break
-		} else if tableEntries[opcode].nextTable != nil {
-			currentTable = tableEntries[opcode].nextTable
-			tableEntries = currentTable.entries
-			offset = uint16(currentTable.opcodeOffset)
+			addr += offset
+			return result, addr
+		}
+
+		if current.entries[opcode].nextTable != nil {
+			current = current.entries[opcode].nextTable
+			offset = uint16(current.opcodeOffset)
 		} else {
 			break
 		}
 	}
-	return result, addr + offset + arglen
+	return result, addr + offset
 }
 
 func (c *Context) doExecute() {
